@@ -20,7 +20,7 @@ export const labPlatforms: LabPlatform[] = [
     profileUrl: "https://tryhackme.com/p/saikot0x",
     buttonLabel: "View TryHackMe Profile",
     stats: [
-      { label: "Rooms completed", value: "—" },
+      { label: "Rooms completed", value: "10" },
       { label: "Learning paths", value: "—" },
       { label: "Badges", value: "—" },
     ],
