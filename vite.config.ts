@@ -5,4 +5,7 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   base: '/portfolio/',
   plugins: [react()],
+  css: {
+    postcss: './postcss.config.js',
+  },
 })
