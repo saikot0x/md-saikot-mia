@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  --color-bg: #0A0E13;
+  --color-bg-raised: #0F151C;
+  --color-panel: #121922;
+  --color-panel-alt: #161E28;
+  --color-border: #232D38;
+  --color-border-soft: #1A222C;
+  --color-ink: #E7ECF1;
+  --color-ink-dim: #8C9AA8;
+  --color-ink-faint: #5C6875;
+  --color-cyan: #4DD8C0;
+  --color-cyan-dim: #2E7C6F;
+  --color-blue: #5B8DEF;
+  --color-amber: #E3A23C;
+  --color-red: #E2635E;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+  }
+  ::selection {
+    background: var(--color-cyan);
+    color: #051210;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-cyan);
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@layer utilities {
+  .container-shell {
+    max-width: 1180px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+  .section-tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+    color: var(--color-cyan);
+  }
+  .panel {
+    background-color: var(--color-panel);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+  }
+  .grid-overlay {
+    background-image:
+      linear-gradient(to right, rgba(77, 216, 192, 0.055) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(77, 216, 192, 0.055) 1px, transparent 1px);
+    background-size: 42px 42px;
+  }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+.pulse-dot {
+  animation: pulse-dot 2.2s ease-in-out infinite;
+}
+
+@keyframes dash-flow {
+  to { stroke-dashoffset: -200; }
+}
+.dash-flow {
+  stroke-dasharray: 4 6;
+  animation: dash-flow 6s linear infinite;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-up {
+  animation: fade-up 0.6s ease-out both;
+}
+
+@keyframes caret-blink {
+  0%, 45% { opacity: 1; }
+  50%, 95% { opacity: 0; }
+  100% { opacity: 1; }
+}
+.caret {
+  animation: caret-blink 1s step-end infinite;
+}
