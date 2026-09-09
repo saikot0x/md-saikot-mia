@@ -15,7 +15,7 @@ export const site = {
 export const socials = {
   github: "https://github.com/saikot0x",
   linkedin: "https://www.linkedin.com/in/saikot0x/",
-  tryhackme: "[ADD_TRYHACKME_URL]",
+  tryhackme: "https://tryhackme.com/p/saikot0x",
   hackthebox: "[ADD_HACKTHEBOX_URL]",
   medium: "[ADD_MEDIUM_URL]",
   x: "[ADD_X_URL]",
