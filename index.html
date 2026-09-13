@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Md Saikot Mia | Cyber Security &amp; Networking Portfolio</title>
+<meta name="description" content="Md Saikot Mia (saikot0x) — CST student focusing on Networking & Cyber Security. Projects, CTF labs and security writeups showcasing practical skills." />
+<meta name="author" content="Md Saikot Mia" />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://saikot0x.github.io/md-saikot-mia/" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://saikot0x.github.io/md-saikot-mia/" />
+<meta property="og:title" content="Md Saikot Mia | Cyber Security &amp; Networking Portfolio" />
+<meta property="og:description" content="CST student building a career path from Networking into Cyber Security. Practical projects, CTF labs and security writeups." />
+<meta property="og:site_name" content="Md Saikot Mia — Portfolio" />
+<meta property="og:image" content="https://saikot0x.github.io/md-saikot-mia/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Md Saikot Mia | Cyber Security &amp; Networking Portfolio" />
+<meta name="twitter:description" content="CST student building a career path from Networking into Cyber Security." />
+<meta name="twitter:image" content="https://saikot0x.github.io/md-saikot-mia/og-image.png" />
+<meta name="theme-color" content="#0f172a" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230B0F14'/%3E%3Ccircle cx='9' cy='23' r='2.4' fill='%234DD8C0'/%3E%3Ccircle cx='23' cy='9' r='2.4' fill='%234DD8C0'/%3E%3Ccircle cx='23' cy='23' r='2.4' fill='%235B8DEF'/%3E%3Cpath d='M9 23 L23 9 M9 23 L23 23' stroke='%232A3540' stroke-width='1.6'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Md Saikot Mia",
+  "alternateName": ["saikot0x", "Md Saikot Islam"],
+  "alumniOf": [
+    { "@type": "CollegeOrUniversity", "name": "Habiganj Polytechnic Institute" },
+    { "@type": "School", "name": "Hazi Boyen Uddin Public High School" }
+  ],
+  "sameAs": [
+    "https://github.com/saikot0x",
+    "https://www.linkedin.com/in/saikot0x/",
+    "https://tryhackme.com/p/saikot0x",
+    "https://www.facebook.com/saikot0x",
+    "https://www.instagram.com/saikot0x",
+    "https://x.com/saikot_0x"
+  ],
+  "jobTitle": "Computer Science & Technology Student",
+  "knowsAbout": ["Cyber Security", "Ethical Hacking", "Networking", "Kali Linux", "Python", "Network Security"]
+}
+</script>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body data-owner-email="saikotpc@gmail.com">
+<a href="#main" class="skip-link">Skip to content</a>
+
+<!--
+  ============================================================================
+  HOW TO EDIT THIS SITE (HTML ONLY — no JavaScript knowledge needed)
+  ============================================================================
+  Every section below is written directly in HTML with your real content.
+  To add something new (a certificate, a CTF writeup, an education entry...),
+  find that section, copy the block marked "COPY THIS BLOCK", paste it right
+  below itself, and edit the text inside. script.js only handles menu/filter/
+  form behaviour now — it does not need to be touched to add content.
+  Placeholder links look like [ADD_SOMETHING_URL] — replace the whole
+  bracketed text with a real https:// link and it becomes clickable
+  automatically (no other change needed).
+  ============================================================================
+-->
+
+<header class="site-header" id="siteHeader">
+  <div class="container-shell nav-inner">
+    <a href="#home" class="brand" data-nav="#home">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m7 9 3 3-3 3"/><path d="M13 15h4"/></svg>
+      <span class="brand-name">Saikot Mia</span>
+      <span class="brand-handle">/saikot0x</span>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Main navigation">
+      <a href="#home" data-nav="#home">Home</a>
+      <a href="#about" data-nav="#about">About</a>
+      <a href="#skills" data-nav="#skills">Skills</a>
+      <a href="#projects" data-nav="#projects">Projects</a>
+      <a href="#labs" data-nav="#labs">CTF/Labs</a>
+      <a href="#writeups" data-nav="#writeups">Writeups</a>
+      <a href="#certifications" data-nav="#certifications">Certifications</a>
+      <a href="#education" data-nav="#education">Education</a>
+      <a href="#resume" data-nav="#resume">Resume</a>
+      <a href="#contact" data-nav="#contact">Contact</a>
+    </nav>
+
+    <button class="menu-btn" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+      <svg id="menuIconOpen" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+      <svg id="menuIconClose" style="display:none" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav container-shell" id="mobileNav" aria-label="Mobile navigation">
+    <a href="#home" data-nav="#home">Home</a>
+    <a href="#about" data-nav="#about">About</a>
+    <a href="#skills" data-nav="#skills">Skills</a>
+    <a href="#projects" data-nav="#projects">Projects</a>
+    <a href="#labs" data-nav="#labs">CTF/Labs</a>
+    <a href="#writeups" data-nav="#writeups">Writeups</a>
+    <a href="#certifications" data-nav="#certifications">Certifications</a>
+    <a href="#education" data-nav="#education">Education</a>
+    <a href="#resume" data-nav="#resume">Resume</a>
+    <a href="#contact" data-nav="#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="main">
+
+  <!-- ============ HOME / HERO ============ -->
+  <section id="home" class="grid-overlay">
+    <div class="hero-bg" id="heroBg" aria-hidden="true">
+      <svg viewBox="0 0 520 320" preserveAspectRatio="xMidYMid slice" width="100%" height="100%">
+        <line x1="220" y1="40" x2="60" y2="70" stroke="var(--color-cyan)" stroke-opacity="0.25" stroke-width="1" class="dash-flow" />
+        <line x1="220" y1="40" x2="340" y2="130" stroke="var(--color-cyan)" stroke-opacity="0.25" stroke-width="1" />
+        <line x1="340" y1="130" x2="420" y2="60" stroke="var(--color-cyan)" stroke-opacity="0.25" stroke-width="1" />
+        <line x1="60" y1="70" x2="150" y2="190" stroke="var(--color-cyan)" stroke-opacity="0.25" stroke-width="1" class="dash-flow" />
+        <line x1="150" y1="190" x2="300" y2="250" stroke="var(--color-cyan)" stroke-opacity="0.25" stroke-width="1" />
+        <line x1="340" y1="130" x2="480" y2="200" stroke="var(--color-cyan)" stroke-opacity="0.25" stroke-width="1" />
+        <line x1="420" y1="60" x2="480" y2="200" stroke="var(--color-cyan)" stroke-opacity="0.25" stroke-width="1" />
+        <line x1="150" y1="190" x2="40" y2="260" stroke="var(--color-cyan)" stroke-opacity="0.25" stroke-width="1" class="dash-flow" />
+        <circle cx="60" cy="70" r="3.5" fill="var(--color-blue)" opacity="0.8" />
+        <circle cx="220" cy="40" r="2.5" fill="var(--color-cyan)" opacity="0.8" />
+        <circle cx="340" cy="130" r="3.5" fill="var(--color-cyan)" opacity="0.8" />
+        <circle cx="150" cy="190" r="2.5" fill="var(--color-blue)" opacity="0.8" />
+        <circle cx="420" cy="60" r="3.5" fill="var(--color-cyan)" opacity="0.8" />
+        <circle cx="480" cy="200" r="2.5" fill="var(--color-cyan)" opacity="0.8" />
+        <circle cx="40" cy="260" r="3.5" fill="var(--color-blue)" opacity="0.8" />
+        <circle cx="300" cy="250" r="2.5" fill="var(--color-cyan)" opacity="0.8" />
+      </svg>
+      <div class="hero-gradient"></div>
+    </div>
+    <div class="container-shell hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge"><span class="dot pulse-dot"></span>Open to internships &amp; networking roles</div>
+        <h1 class="hero-title">Md Saikot Mia</h1>
+        <!-- Edit data-roles below to change the typing words in the hero (separate with |) -->
+        <p class="hero-role" data-roles="Networking Enthusiast|Cyber Security Learner|Future SOC Analyst">CST Student &middot; <span class="typed" id="typedRole"></span><span class="caret">_</span></p>
+        <p class="hero-intro">I'm a Computer Science &amp; Technology student building my foundation in networking, Linux and practical security work. My path starts in networking and IT support, and grows into cyber security — one lab, one scan, one writeup at a time.</p>
+        <div class="hero-cta">
+          <a href="#projects" class="btn-primary" data-nav="#projects">
+            View My Projects
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+          <a href="./resume.pdf" download class="btn-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"/><path d="M6 21h12"/><path d="m6 15 6 6 6-6"/></svg>
+            Download Resume
+          </a>
+        </div>
+        <div class="hero-socials">
+          <a class="icon-btn" href="https://github.com/saikot0x" target="_blank" rel="noreferrer" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0.8C5.6 0.8 0.5 5.9 0.5 12.3c0 5.1 3.3 9.4 7.9 11 .6.1.8-.3.8-.6v-2.1c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11 11 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.6 7.9-5.9 7.9-11C23.5 5.9 18.4.8 12 .8Z"/></svg></a>
+          <a class="icon-btn" href="https://www.linkedin.com/in/saikot0x/" target="_blank" rel="noreferrer" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2ZM8.3 18.5H5.7V9.7h2.6v8.8ZM7 8.6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm11.5 9.9h-2.6v-4.3c0-1-.02-2.4-1.5-2.4-1.5 0-1.7 1.1-1.7 2.3v4.4H10V9.7h2.5v1.2h.03c.35-.65 1.2-1.4 2.5-1.4 2.7 0 3.2 1.8 3.2 4.1v5Z"/></svg></a>
+          <a class="icon-btn" href="https://tryhackme.com/p/saikot0x" target="_blank" rel="noreferrer" aria-label="TryHackMe" title="TryHackMe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1Z"/><path d="m9 12 2 2 4-4"/></svg></a>
+          <!-- To enable Medium/X: replace the [ADD_...] text in href with your real profile URL -->
+          <a class="icon-btn" href="[ADD_MEDIUM_URL]" target="_blank" rel="noreferrer" aria-label="Medium" title="Medium"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18H3a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2v13a3 3 0 0 0 3 3Z"/><path d="M18 14h1a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1"/><path d="M12 6h4"/><path d="M12 10h4"/><path d="M12 14h4"/><path d="M8 6h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg></a>
+          <a class="icon-btn" href="https://x.com/saikot_0x" target="_blank" rel="noreferrer" aria-label="X" title="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.3 2H21l-6.6 7.6L22.2 22h-6.8l-5.3-6.9L4 22H1.3l7.1-8.1L1 2h6.9l4.8 6.3L18.3 2Zm-1.2 18h1.5L7 4h-1.6l11.7 16Z"/></svg></a>
+          <a class="icon-btn" href="https://www.facebook.com/saikot0x" target="_blank" rel="noreferrer" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12.06C22 6.48 17.52 2 11.94 2S1.88 6.48 1.88 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.42V9.91c0-2.39 1.42-3.71 3.6-3.71 1.04 0 2.13.19 2.13.19v2.34h-1.2c-1.18 0-1.55.73-1.55 1.48v1.78h2.64l-.42 2.91h-2.22V22c4.78-.76 8.44-4.92 8.44-9.94Z"/></svg></a>
+          <a class="icon-btn" href="https://www.instagram.com/saikot0x" target="_blank" rel="noreferrer" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section id="about">
+    <div class="container-shell">
+      <div class="section-heading fade-up">
+        <p class="section-tag">SEC-01 &middot; Profile</p>
+        <h2 class="section-title">About</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p><span class="highlight">Md Saikot Mia.</span> I'm a Computer Science &amp; Technology student interested in networking and cyber security. I'm currently building my foundation in networking, Linux, security tools, ethical hacking, and practical security labs.</p>
+          <p>My career goal is to start my professional journey in networking and gradually grow into a cyber security professional — learning through real labs, packet captures, and small tools rather than theory alone.</p>
+        </div>
+        <div class="panel facts-panel">
+          <div class="fact-item"><span class="fact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg></span>CST Student</div>
+          <div class="fact-item"><span class="fact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/></svg></span>Networking Enthusiast</div>
+          <div class="fact-item"><span class="fact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1Z"/><path d="m9 12 2 2 4-4"/></svg></span>Cyber Security Learner</div>
+          <div class="fact-item"><span class="fact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m7 9 3 3-3 3"/><path d="M13 15h4"/></svg></span>Linux User</div>
+          <div class="fact-item"><span class="fact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V2"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/><path d="M5.52 16h12.96"/></svg></span>Practical Lab Learner</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SKILLS ============ -->
+  <!-- Valid level classes: lvl-Practical, lvl-Intermediate, lvl-Familiar, lvl-Learning -->
+  <section id="skills">
+    <div class="container-shell">
+      <div class="section-heading fade-up">
+        <p class="section-tag">SEC-02 &middot; Capabilities</p>
+        <h2 class="section-title">Skills</h2>
+        <p class="section-desc">Grouped by domain — levels reflect honest, current standing, not inflated percentages.</p>
+      </div>
+      <div class="skills-grid">
+
+        <div class="panel skill-card">
+          <h3>Networking</h3>
+          <div class="skill-tags">
+            <span class="skill-tag lvl-Intermediate" title="Intermediate">TCP/IP</span>
+            <span class="skill-tag lvl-Intermediate" title="Intermediate">OSI Model</span>
+            <span class="skill-tag lvl-Intermediate" title="Intermediate">IPv4 / IPv6</span>
+            <span class="skill-tag lvl-Practical" title="Practical">Subnetting</span>
+            <span class="skill-tag lvl-Intermediate" title="Intermediate">DNS</span>
+            <span class="skill-tag lvl-Intermediate" title="Intermediate">DHCP</span>
+            <span class="skill-tag lvl-Familiar" title="Familiar">NAT</span>
+            <span class="skill-tag lvl-Intermediate" title="Intermediate">HTTP / HTTPS</span>
+            <span class="skill-tag lvl-Familiar" title="Familiar">VLAN</span>
+            <span class="skill-tag lvl-Familiar" title="Familiar">Routing</span>
+            <span class="skill-tag lvl-Familiar" title="Familiar">Switching</span>
+            <span class="skill-tag lvl-Practical" title="Practical">Network Troubleshooting</span>
+            <span class="skill-tag lvl-Practical" title="Practical">Wireshark</span>
+            <span class="skill-tag lvl-Practical" title="Practical">Nmap</span>
+            <!-- COPY THIS BLOCK to add a new Networking skill -->
+            <!-- <span class="skill-tag lvl-Learning" title="Learning">New Skill</span> -->
+          </div>
+        </div>
+
+        <div class="panel skill-card">
+          <h3>Cyber Security</h3>
+          <div class="skill-tags">
+            <span class="skill-tag lvl-Practical" title="Practical">Reconnaissance</span>
+            <span class="skill-tag lvl-Intermediate" title="Intermediate">Network Security</span>
+            <span class="skill-tag lvl-Learning" title="Learning">Vulnerability Assessment</span>
+            <span class="skill-tag lvl-Intermediate" title="Intermediate">Web Security</span>
+            <span class="skill-tag lvl-Learning" title="Learning">Authentication Security</span>
+            <span class="skill-tag lvl-Practical" title="Practical">Linux Security</span>
+            <span class="skill-tag lvl-Learning" title="Learning">Basic Threat Hunting</span>
+            <span class="skill-tag lvl-Learning" title="Learning">Security Monitoring</span>
+            <span class="skill-tag lvl-Practical" title="Practical">CTF</span>
+            <span class="skill-tag lvl-Intermediate" title="Intermediate">Ethical Hacking Fundamentals</span>
+            <!-- COPY THIS BLOCK to add a new Cyber Security skill -->
+            <!-- <span class="skill-tag lvl-Learning" title="Learning">New Skill</span> -->
+          </div>
+        </div>
+
+        <div class="panel skill-card">
+          <h3>Programming</h3>
+          <div class="skill-tags">
+            <span class="skill-tag lvl-Practical" title="Practical">Python</span>
+            <span class="skill-tag lvl-Intermediate" title="Intermediate">Bash</span>
+            <span class="skill-tag lvl-Practical" title="Practical">HTML</span>
+            <span class="skill-tag lvl-Practical" title="Practical">CSS</span>
+            <span class="skill-tag lvl-Intermediate" title="Intermediate">JavaScript</span>
+            <span class="skill-tag lvl-Intermediate" title="Intermediate">Git</span>
+            <span class="skill-tag lvl-Practical" title="Practical">GitHub</span>
+            <!-- COPY THIS BLOCK to add a new Programming skill -->
+            <!-- <span class="skill-tag lvl-Learning" title="Learning">New Skill</span> -->
+          </div>
+        </div>
+
+        <div class="panel skill-card">
+          <h3>Security / Technical Tools</h3>
+          <div class="skill-tags">
+            <span class="skill-tag lvl-Practical" title="Practical">Kali Linux</span>
+            <span class="skill-tag lvl-Practical" title="Practical">Nmap</span>
+            <span class="skill-tag lvl-Practical" title="Practical">Wireshark</span>
+            <span class="skill-tag lvl-Intermediate" title="Intermediate">Burp Suite</span>
+            <span class="skill-tag lvl-Learning" title="Learning">Metasploit</span>
+            <span class="skill-tag lvl-Learning" title="Learning">Gobuster</span>
+            <span class="skill-tag lvl-Learning" title="Learning">SQLMap</span>
+            <span class="skill-tag lvl-Familiar" title="Familiar">Hashcat</span>
+            <span class="skill-tag lvl-Familiar" title="Familiar">John the Ripper</span>
+            <span class="skill-tag lvl-Intermediate" title="Intermediate">Git</span>
+            <!-- COPY THIS BLOCK to add a new Tool -->
+            <!-- <span class="skill-tag lvl-Learning" title="Learning">New Tool</span> -->
+          </div>
+        </div>
+
+      </div>
+      <div class="skills-legend">
+        <span class="leg"><span class="leg-dot lvl-Practical"></span>Practical</span>
+        <span class="leg"><span class="leg-dot lvl-Intermediate"></span>Intermediate</span>
+        <span class="leg"><span class="leg-dot lvl-Familiar"></span>Familiar</span>
+        <span class="leg"><span class="leg-dot lvl-Learning"></span>Learning</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROJECTS ============ -->
+  <!-- Valid status text (controls badge color): Live, Complete, In Progress, Planned -->
+  <section id="projects">
+    <div class="container-shell">
+      <div class="section-head-row">
+        <div class="section-heading fade-up">
+          <p class="section-tag">SEC-03 &middot; Build Log</p>
+          <h2 class="section-title">Projects</h2>
+          <p class="section-desc">Practical work spanning networking tools, security labs, and applied programming.</p>
+        </div>
+        <a href="https://github.com/saikot0x" target="_blank" rel="noreferrer" class="repo-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0.8C5.6 0.8 0.5 5.9 0.5 12.3c0 5.1 3.3 9.4 7.9 11 .6.1.8-.3.8-.6v-2.1c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11 11 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.6 7.9-5.9 7.9-11C23.5 5.9 18.4.8 12 .8Z"/></svg>
+          All repos on GitHub
+        </a>
+      </div>
+      <div class="projects-grid">
+
+        <article class="panel project-card">
+          <div class="project-head"><h3>Network Scanner</h3><span class="status-badge status-InProgress">In Progress</span></div>
+          <p class="project-desc">A Python-based network scanning tool designed to discover hosts, open ports, services, and basic network information on a local network.</p>
+          <p class="project-problem"><span class="lbl">Problem solved: </span>Manually checking which hosts and services are reachable on a network is slow and error-prone — this automates host discovery and reporting.</p>
+          <ul class="project-features">
+            <li><span class="feat-dot"></span>Host discovery</li>
+            <li><span class="feat-dot"></span>Port scanning</li>
+            <li><span class="feat-dot"></span>Service detection</li>
+            <li><span class="feat-dot"></span>Basic enumeration</li>
+          </ul>
+          <div class="project-tools"><span class="tool-chip">Python</span><span class="tool-chip">Nmap</span><span class="tool-chip">Linux</span></div>
+          <div class="project-links">
+            <!-- Once you have a repo, replace the line below with: <a href="https://github.com/saikot0x/REPO" target="_blank" rel="noreferrer">GitHub icon + GitHub</a> -->
+            <span class="muted"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0.8C5.6 0.8 0.5 5.9 0.5 12.3c0 5.1 3.3 9.4 7.9 11 .6.1.8-.3.8-.6v-2.1c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11 11 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.6 7.9-5.9 7.9-11C23.5 5.9 18.4.8 12 .8Z"/></svg>Repo coming soon</span>
+          </div>
+        </article>
+
+        <article class="panel project-card">
+          <div class="project-head"><h3>Web Security Lab</h3><span class="status-badge status-InProgress">In Progress</span></div>
+          <p class="project-desc">A controlled web security laboratory for learning and demonstrating common web vulnerabilities in a safe, isolated environment.</p>
+          <p class="project-problem"><span class="lbl">Problem solved: </span>Understanding web vulnerabilities requires hands-on practice, not just theory — this lab is a repeatable environment for testing and documenting findings.</p>
+          <ul class="project-features">
+            <li><span class="feat-dot"></span>XSS testing</li>
+            <li><span class="feat-dot"></span>SQL Injection testing</li>
+            <li><span class="feat-dot"></span>Authentication vulnerability analysis</li>
+            <li><span class="feat-dot"></span>HTTP request analysis</li>
+          </ul>
+          <div class="project-tools"><span class="tool-chip">Burp Suite</span><span class="tool-chip">Kali Linux</span><span class="tool-chip">OWASP Juice Shop</span></div>
+          <div class="project-links">
+            <span class="muted"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0.8C5.6 0.8 0.5 5.9 0.5 12.3c0 5.1 3.3 9.4 7.9 11 .6.1.8-.3.8-.6v-2.1c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11 11 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.6 7.9-5.9 7.9-11C23.5 5.9 18.4.8 12 .8Z"/></svg>Repo coming soon</span>
+          </div>
+        </article>
+
+        <article class="panel project-card">
+          <div class="project-head"><h3>Wireshark Network Analysis</h3><span class="status-badge status-InProgress">In Progress</span></div>
+          <p class="project-desc">A practical network traffic analysis project using Wireshark to capture and investigate real traffic patterns.</p>
+          <p class="project-problem"><span class="lbl">Problem solved: </span>Reading raw packet captures is a core SOC/network skill — this project builds fluency in spotting normal vs. suspicious traffic.</p>
+          <ul class="project-features">
+            <li><span class="feat-dot"></span>Packet capture</li>
+            <li><span class="feat-dot"></span>TCP analysis</li>
+            <li><span class="feat-dot"></span>UDP analysis</li>
+            <li><span class="feat-dot"></span>DNS analysis</li>
+          </ul>
+          <div class="project-tools"><span class="tool-chip">Wireshark</span><span class="tool-chip">tcpdump</span></div>
+          <div class="project-links">
+            <span class="muted"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0.8C5.6 0.8 0.5 5.9 0.5 12.3c0 5.1 3.3 9.4 7.9 11 .6.1.8-.3.8-.6v-2.1c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11 11 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.6 7.9-5.9 7.9-11C23.5 5.9 18.4.8 12 .8Z"/></svg>Repo coming soon</span>
+          </div>
+        </article>
+
+        <article class="panel project-card">
+          <div class="project-head"><h3>Security Automation Scripts</h3><span class="status-badge status-Planned">Planned</span></div>
+          <p class="project-desc">A collection of Python and Bash scripts that automate basic security and networking tasks to save time during practice and labs.</p>
+          <p class="project-problem"><span class="lbl">Problem solved: </span>Repetitive recon and reporting tasks slow down lab work — small scripts remove that friction.</p>
+          <ul class="project-features">
+            <li><span class="feat-dot"></span>Port scanner</li>
+            <li><span class="feat-dot"></span>IP information tool</li>
+            <li><span class="feat-dot"></span>Log analyzer</li>
+            <li><span class="feat-dot"></span>Hash generator</li>
+          </ul>
+          <div class="project-tools"><span class="tool-chip">Python</span><span class="tool-chip">Bash</span></div>
+          <div class="project-links">
+            <span class="muted"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0.8C5.6 0.8 0.5 5.9 0.5 12.3c0 5.1 3.3 9.4 7.9 11 .6.1.8-.3.8-.6v-2.1c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11 11 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.6 7.9-5.9 7.9-11C23.5 5.9 18.4.8 12 .8Z"/></svg>Repo coming soon</span>
+          </div>
+        </article>
+
+        <article class="panel project-card">
+          <div class="project-head"><h3>JARVIS Assistant</h3><span class="status-badge status-Live">Live</span></div>
+          <p class="project-desc">A voice-enabled AI assistant built for Kali Linux, supporting voice control, local system functions, and an online AI conversation mode.</p>
+          <p class="project-problem"><span class="lbl">Problem solved: </span>Built to explore how far a local-first assistant can go on Linux — combining offline speech tools with an online AI mode for more complex tasks.</p>
+          <ul class="project-features">
+            <li><span class="feat-dot"></span>Voice command control</li>
+            <li><span class="feat-dot"></span>Local system functions</li>
+            <li><span class="feat-dot"></span>Online AI conversation mode</li>
+            <li><span class="feat-dot"></span>Offline STT/TTS fallback</li>
+          </ul>
+          <div class="project-tools"><span class="tool-chip">Python</span><span class="tool-chip">Linux</span><span class="tool-chip">LiveKit</span><span class="tool-chip">Speech-to-Text / Text-to-Speech</span></div>
+          <div class="project-links">
+            <span class="muted"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0.8C5.6 0.8 0.5 5.9 0.5 12.3c0 5.1 3.3 9.4 7.9 11 .6.1.8-.3.8-.6v-2.1c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11 11 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.6 7.9-5.9 7.9-11C23.5 5.9 18.4.8 12 .8Z"/></svg>Repo coming soon</span>
+          </div>
+        </article>
+
+        <article class="panel project-card">
+          <div class="project-head"><h3>Smart Grocery Billing System</h3><span class="status-badge status-Live">Live</span></div>
+          <p class="project-desc">A store management panel for billing, inventory, products and customer records, built as a full college project with a clean dashboard UI.</p>
+          <p class="project-problem"><span class="lbl">Problem solved: </span>Small shops need a simple, reliable billing and inventory workflow without complex POS software — this covers the core operations in one dashboard.</p>
+          <ul class="project-features">
+            <li><span class="feat-dot"></span>Point-of-sale billing</li>
+            <li><span class="feat-dot"></span>Product &amp; category CRUD</li>
+            <li><span class="feat-dot"></span>Customer records</li>
+            <li><span class="feat-dot"></span>Sales reports</li>
+          </ul>
+          <div class="project-tools"><span class="tool-chip">HTML</span><span class="tool-chip">CSS</span><span class="tool-chip">JavaScript</span><span class="tool-chip">Firebase</span></div>
+          <div class="project-links">
+            <span class="muted"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0.8C5.6 0.8 0.5 5.9 0.5 12.3c0 5.1 3.3 9.4 7.9 11 .6.1.8-.3.8-.6v-2.1c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11 11 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.6 7.9-5.9 7.9-11C23.5 5.9 18.4.8 12 .8Z"/></svg>Repo coming soon</span>
+            <a href="https://smart-grocery-billing-system.vercel.app/" target="_blank" rel="noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>Live Demo</a>
+          </div>
+        </article>
+
+        <article class="panel project-card">
+          <div class="project-head"><h3>3D Vibe Store</h3><span class="status-badge status-Complete">Complete</span></div>
+          <p class="project-desc">An interactive 3D landing page with motion effects and a product-focused layout, built to explore 3D web experiences.</p>
+          <p class="project-problem"><span class="lbl">Problem solved: </span>Most product landing pages are flat and static — this explores how 3D and motion can make browsing more engaging.</p>
+          <ul class="project-features">
+            <li><span class="feat-dot"></span>3D interactive scene</li>
+            <li><span class="feat-dot"></span>Motion-based interactions</li>
+            <li><span class="feat-dot"></span>Product-focused layout</li>
+          </ul>
+          <div class="project-tools"><span class="tool-chip">Three.js</span><span class="tool-chip">JavaScript</span><span class="tool-chip">SQLite</span></div>
+          <div class="project-links">
+            <span class="muted"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0.8C5.6 0.8 0.5 5.9 0.5 12.3c0 5.1 3.3 9.4 7.9 11 .6.1.8-.3.8-.6v-2.1c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11 11 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.6 7.9-5.9 7.9-11C23.5 5.9 18.4.8 12 .8Z"/></svg>Repo coming soon</span>
+          </div>
+        </article>
+
+        <article class="panel project-card">
+          <div class="project-head"><h3>Pentest Tool Finder</h3><span class="status-badge status-Complete">Complete</span></div>
+          <p class="project-desc">A Python script that scans a Kali Linux system and organizes installed security tools by category to save time and reduce confusion.</p>
+          <p class="project-problem"><span class="lbl">Problem solved: </span>Kali ships with hundreds of tools — finding the right one by category during a lab is easier with an organized index.</p>
+          <ul class="project-features">
+            <li><span class="feat-dot"></span>Scans installed tool set</li>
+            <li><span class="feat-dot"></span>Groups tools by category</li>
+            <li><span class="feat-dot"></span>Quick lookup during labs</li>
+          </ul>
+          <div class="project-tools"><span class="tool-chip">Python</span><span class="tool-chip">Linux</span><span class="tool-chip">Security</span></div>
+          <div class="project-links">
+            <span class="muted"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0.8C5.6 0.8 0.5 5.9 0.5 12.3c0 5.1 3.3 9.4 7.9 11 .6.1.8-.3.8-.6v-2.1c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11 11 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.6 7.9-5.9 7.9-11C23.5 5.9 18.4.8 12 .8Z"/></svg>Repo coming soon</span>
+          </div>
+        </article>
+
+        <!-- COPY ONE OF THE <article class="panel project-card"> BLOCKS ABOVE TO ADD A NEW PROJECT -->
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTF / SECURITY LABS ============ -->
+  <section id="labs">
+    <div class="container-shell">
+      <div class="section-heading fade-up">
+        <p class="section-tag">SEC-04 &middot; Practice</p>
+        <h2 class="section-title">CTF &amp; Security Labs</h2>
+        <p class="section-desc">Where the hands-on learning happens.</p>
+      </div>
+      <div class="labs-grid">
+
+        <div class="panel lab-card">
+          <div class="lab-head"><h3>TryHackMe</h3><span class="lab-note">Actively in progress — update these by hand as you complete more</span></div>
+          <!--
+            TryHackMe's live embeddable badge (an iframe tied to a "userPublicId")
+            isn't exposed anywhere obvious in the current profile UI for this
+            account — the "Share room badges" button only shares individual
+            achievement badges, not a whole-profile stats widget. Rather than
+            rely on an unofficial/unstable URL, these three numbers are edited
+            by hand — same as the Hack The Box card below. Just update the
+            numbers here whenever you check your profile.
+          -->
+          <div class="lab-stats">
+            <div class="lab-stat"><div class="lab-stat-value">48</div><div class="lab-stat-label">Rooms completed</div></div>
+            <div class="lab-stat"><div class="lab-stat-value">9</div><div class="lab-stat-label">Badges</div></div>
+            <div class="lab-stat"><div class="lab-stat-value">Top 9%</div><div class="lab-stat-label">Rank</div></div>
+          </div>
+          <a class="lab-link" href="https://tryhackme.com/p/saikot0x" target="_blank" rel="noreferrer">View TryHackMe Profile<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></a>
+        </div>
+
+        <div class="panel lab-card">
+          <div class="lab-head"><h3>Hack The Box</h3><span class="lab-note">Profile set up — practical machine work coming next.</span></div>
+          <!-- HTB has no official auto-updating badge yet — edit these two numbers by hand as you progress -->
+          <div class="lab-stats">
+            <div class="lab-stat"><div class="lab-stat-value">—</div><div class="lab-stat-label">Machines solved</div></div>
+            <div class="lab-stat"><div class="lab-stat-value">—</div><div class="lab-stat-label">Labs completed</div></div>
+          </div>
+          <!-- Replace [ADD_HACKTHEBOX_URL] with your real profile link to enable this button -->
+          <a class="lab-link" href="[ADD_HACKTHEBOX_URL]" target="_blank" rel="noreferrer">View Hack The Box Profile<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></a>
+        </div>
+
+        <!-- COPY ONE OF THE <div class="panel lab-card"> BLOCKS ABOVE TO ADD ANOTHER PLATFORM -->
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WRITEUPS ============ -->
+  <!-- To add a category: add a new filter button below AND use the same text in a card's data-category -->
+  <section id="writeups">
+    <div class="container-shell">
+      <div class="section-heading fade-up">
+        <p class="section-tag">SEC-05 &middot; Notes</p>
+        <h2 class="section-title">Writeups</h2>
+        <p class="section-desc">Short technical notes from labs and practice sessions.</p>
+      </div>
+      <div class="filter-row">
+        <button class="filter-btn active" data-filter="All">All</button>
+        <button class="filter-btn" data-filter="Networking">Networking</button>
+        <button class="filter-btn" data-filter="Cyber Security">Cyber Security</button>
+        <button class="filter-btn" data-filter="Linux">Linux</button>
+        <button class="filter-btn" data-filter="Web Security">Web Security</button>
+        <button class="filter-btn" data-filter="CTF">CTF</button>
+      </div>
+      <div class="writeups-grid">
+
+        <article class="panel writeup-card" data-category="Networking">
+          <div class="writeup-meta"><span>Networking</span><span>2026</span></div>
+          <h3 class="writeup-title">Understanding TCP Three-Way Handshake</h3>
+          <p class="writeup-summary">How SYN, SYN-ACK and ACK establish a reliable connection, and what it looks like in a packet capture.</p>
+          <div class="writeup-footer"><span class="diff diff-Beginner">Beginner</span><span class="soon">Publishing soon</span></div>
+        </article>
+
+        <article class="panel writeup-card" data-category="Networking">
+          <div class="writeup-meta"><span>Networking</span><span>2026</span></div>
+          <h3 class="writeup-title">Nmap Port Scanning — Beginner to Practical</h3>
+          <p class="writeup-summary">Working through Nmap scan types, timing options and service detection with real examples from lab practice.</p>
+          <div class="writeup-footer"><span class="diff diff-Beginner">Beginner</span><span class="soon">Publishing soon</span></div>
+        </article>
+
+        <article class="panel writeup-card" data-category="Networking">
+          <div class="writeup-meta"><span>Networking</span><span>2026</span></div>
+          <h3 class="writeup-title">Wireshark: Analyzing DNS Traffic</h3>
+          <p class="writeup-summary">Filtering and reading DNS queries and responses in Wireshark, including what suspicious lookups can look like.</p>
+          <div class="writeup-footer"><span class="diff diff-Intermediate">Intermediate</span><span class="soon">Publishing soon</span></div>
+        </article>
+
+        <article class="panel writeup-card" data-category="Linux">
+          <div class="writeup-meta"><span>Linux</span><span>2026</span></div>
+          <h3 class="writeup-title">Linux Privilege Escalation Basics</h3>
+          <p class="writeup-summary">Common misconfigurations and enumeration steps used to move from a low-privilege shell to root in practice labs.</p>
+          <div class="writeup-footer"><span class="diff diff-Intermediate">Intermediate</span><span class="soon">Publishing soon</span></div>
+        </article>
+
+        <article class="panel writeup-card" data-category="Web Security">
+          <div class="writeup-meta"><span>Web Security</span><span>2026</span></div>
+          <h3 class="writeup-title">Web Security Testing with Burp Suite</h3>
+          <p class="writeup-summary">Setting up Burp Suite as a proxy and walking through request interception, repeater and basic vulnerability testing.</p>
+          <div class="writeup-footer"><span class="diff diff-Intermediate">Intermediate</span><span class="soon">Publishing soon</span></div>
+        </article>
+
+        <article class="panel writeup-card" data-category="CTF">
+          <div class="writeup-meta"><span>CTF</span><span>2026</span></div>
+          <h3 class="writeup-title">My TryHackMe Learning Journey</h3>
+          <p class="writeup-summary">Rooms, learning paths and lessons from my ongoing TryHackMe practice, and what I'm focusing on next.</p>
+          <div class="writeup-footer"><span class="diff diff-Beginner">Beginner</span><span class="soon">Publishing soon</span></div>
+        </article>
+
+        <!--
+          COPY ONE OF THE <article class="panel writeup-card"> BLOCKS ABOVE TO ADD A NEW WRITEUP.
+          Once you publish it somewhere, replace <span class="soon">Publishing soon</span> with:
+          <a href="https://your-link" target="_blank" rel="noreferrer">Read More (arrow icon)</a>
+        -->
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CERTIFICATIONS ============ -->
+  <section id="certifications">
+    <div class="container-shell">
+      <div class="section-heading fade-up">
+        <p class="section-tag">SEC-06 &middot; Credentials</p>
+        <h2 class="section-title">Certifications</h2>
+      </div>
+      <div class="certs-wrap">
+        <div class="certs-grid">
+
+          <div class="panel cert-card">
+            <span class="cert-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+            <div>
+              <h3>Cybersecurity (V2)</h3>
+              <p class="issuer">Muktopaath — DIKKHA Project, ICT Division</p>
+              <div class="cert-meta"><span>2026</span></div>
+            </div>
+          </div>
+
+          <!--
+            COPY THE BLOCK ABOVE TO ADD A NEW CERTIFICATE. To add a credential ID or a
+            verify link, add these lines inside .cert-meta:
+            <span>ID: YOUR-ID</span>
+            <a href="https://verify-url" target="_blank" rel="noreferrer" style="display:inline-flex;align-items:center;gap:0.25rem;color:var(--color-cyan)">Verify (arrow icon)</a>
+          -->
+
+        </div>
+        <div class="panel dashed cert-note">Currently building certifications and practical security experience.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EDUCATION ============ -->
+  <!-- Valid timeline status text (controls color): Done, Complete, In Progress, Planned -->
+  <section id="education">
+    <div class="container-shell">
+      <div class="section-heading fade-up">
+        <p class="section-tag">SEC-07 &middot; Path</p>
+        <h2 class="section-title">Education</h2>
+      </div>
+      <div class="edu-grid">
+        <div class="panel edu-card">
+          <h3>Diploma in Computer Science &amp; Technology</h3>
+          <p class="edu-inst">Habiganj Polytechnic Institute</p>
+          <div class="edu-badges"><span class="b1">Computer Science &amp; Technology</span><span class="b2">Currently studying</span></div>
+          <p class="edu-sub-label">Relevant subjects</p>
+          <ul class="edu-subjects">
+            <li><span class="feat-dot"></span>Data Communication</li>
+            <li><span class="feat-dot"></span>Operating System</li>
+            <li><span class="feat-dot"></span>Microprocessor &amp; Architecture</li>
+            <li><span class="feat-dot"></span>Programming</li>
+            <li><span class="feat-dot"></span>Web Development</li>
+            <li><span class="feat-dot"></span>Data Structures &amp; Algorithms</li>
+            <!-- COPY <li><span class="feat-dot"></span>Subject Name</li> TO ADD A SUBJECT -->
+          </ul>
+          <p class="edu-sub-label" style="margin-top:1.25rem">Secondary education</p>
+          <p class="edu-inst" style="margin-top:0.25rem">Hazi Boyen Uddin Public High School</p>
+        </div>
+
+        <ol class="timeline">
+          <li>
+            <span class="tdot"></span>
+            <div class="trow"><span class="tyear">2020</span><span class="tstatus tstatus-Done">Done</span></div>
+
+            <p class="tdetail">Started learning ethical hacking with Termux</p>
+          </li>
+          <li>
+            <span class="tdot"></span>
+            <div class="trow"><span class="tyear">2025</span><span class="tstatus tstatus-Done">Done</span></div>
+            <p class="tdetail">Focused learning on cybersecurity and networking through practice</p>
+          </li>
+          <li>
+            <span class="tdot"></span>
+            <div class="trow"><span class="tyear">2026</span><span class="tstatus tstatus-Complete">Complete</span></div>
+            <p class="tdetail">Completed Cybersecurity (V2) course on Muktopaath</p>
+          </li>
+          <li>
+            <span class="tdot"></span>
+            <div class="trow"><span class="tyear">Ongoing</span><span class="tstatus tstatus-InProgress">In Progress</span></div>
+            <p class="tdetail">CST diploma and practical project work</p>
+          </li>
+          <li>
+            <span class="tdot"></span>
+            <div class="trow"><span class="tyear">Next</span><span class="tstatus tstatus-Planned">Planned</span></div>
+            <p class="tdetail">Network/IT role and career growth into cyber security</p>
+          </li>
+          <!--
+            COPY ONE <li> BLOCK ABOVE TO ADD A NEW TIMELINE ENTRY (e.g. a new college/exam).
+            Also update the .edu-card block above if it's a new institution/degree.
+          -->
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RESUME ============ -->
+  <section id="resume">
+    <div class="container-shell">
+      <div class="section-heading fade-up">
+        <p class="section-tag">SEC-08 &middot; Resume</p>
+        <h2 class="section-title">Resume</h2>
+      </div>
+      <div class="resume-grid">
+        <div class="panel resume-card">
+          <div class="resume-label">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+            <span>Career focus</span>
+          </div>
+          <p class="resume-focus">Networking → Cyber Security</p>
+          <div class="resume-label" style="margin-top:1.5rem">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+            <span>Target roles</span>
+          </div>
+          <div class="roles-wrap">
+            <span class="role-chip">Network Support</span>
+            <span class="role-chip">NOC Engineer</span>
+            <span class="role-chip">Junior Network Engineer</span>
+            <span class="role-chip">SOC Analyst</span>
+            <span class="role-chip">Cyber Security Intern</span>
+            <span class="role-chip">Junior Cyber Security Analyst</span>
+            <!-- COPY <span class="role-chip">Role Name</span> TO ADD A TARGET ROLE -->
+          </div>
+          <a href="./resume.pdf" download class="btn-primary" style="margin-top:2rem;width:fit-content">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"/><path d="M6 21h12"/><path d="m6 15 6 6 6-6"/></svg>
+            Download Resume
+          </a>
+          <p class="resume-note">PDF &middot; updated as skills and experience grow.</p>
+        </div>
+        <div class="panel resume-preview">
+          <div class="resume-preview-inner">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-ink-faint)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"/><path d="M6 21h12"/><path d="m6 15 6 6 6-6"/></svg>
+            <p>Resume preview</p>
+            <p class="small">Replace <code>resume.pdf</code> in this folder with your real resume (keep the same filename) to update the download.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section id="contact">
+    <div class="container-shell">
+      <div class="section-heading fade-up">
+        <p class="section-tag">SEC-09 &middot; Reach out</p>
+        <h2 class="section-title">Contact</h2>
+        <p class="section-desc">Open to internships, IT support roles, networking jobs, and cyber security opportunities in Bangladesh and beyond.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-links">
+          <a class="contact-link" href="mailto:saikotpc@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>Email</a>
+          <a class="contact-link" href="https://github.com/saikot0x" target="_blank" rel="noreferrer"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0.8C5.6 0.8 0.5 5.9 0.5 12.3c0 5.1 3.3 9.4 7.9 11 .6.1.8-.3.8-.6v-2.1c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11 11 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.6 7.9-5.9 7.9-11C23.5 5.9 18.4.8 12 .8Z"/></svg>GitHub</a>
+          <a class="contact-link" href="https://www.linkedin.com/in/saikot0x/" target="_blank" rel="noreferrer"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2ZM8.3 18.5H5.7V9.7h2.6v8.8ZM7 8.6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm11.5 9.9h-2.6v-4.3c0-1-.02-2.4-1.5-2.4-1.5 0-1.7 1.1-1.7 2.3v4.4H10V9.7h2.5v1.2h.03c.35-.65 1.2-1.4 2.5-1.4 2.7 0 3.2 1.8 3.2 4.1v5Z"/></svg>LinkedIn</a>
+          <a class="contact-link" href="https://tryhackme.com/p/saikot0x" target="_blank" rel="noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1Z"/><path d="m9 12 2 2 4-4"/></svg>TryHackMe</a>
+          <a class="contact-link" href="[ADD_MEDIUM_URL]" target="_blank" rel="noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18H3a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2v13a3 3 0 0 0 3 3Z"/><path d="M18 14h1a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1"/><path d="M12 6h4"/><path d="M12 10h4"/><path d="M12 14h4"/><path d="M8 6h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>Medium</a>
+          <a class="contact-link" href="https://x.com/saikot_0x" target="_blank" rel="noreferrer"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.3 2H21l-6.6 7.6L22.2 22h-6.8l-5.3-6.9L4 22H1.3l7.1-8.1L1 2h6.9l4.8 6.3L18.3 2Zm-1.2 18h1.5L7 4h-1.6l11.7 16Z"/></svg>X</a>
+          <a class="contact-link" href="https://www.facebook.com/saikot0x" target="_blank" rel="noreferrer"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12.06C22 6.48 17.52 2 11.94 2S1.88 6.48 1.88 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.42V9.91c0-2.39 1.42-3.71 3.6-3.71 1.04 0 2.13.19 2.13.19v2.34h-1.2c-1.18 0-1.55.73-1.55 1.48v1.78h2.64l-.42 2.91h-2.22V22c4.78-.76 8.44-4.92 8.44-9.94Z"/></svg>Facebook</a>
+          <a class="contact-link" href="https://www.instagram.com/saikot0x" target="_blank" rel="noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>Instagram</a>
+        </div>
+
+        <form class="panel contact-form" id="contactForm" novalidate>
+          <div class="form-row">
+            <div class="form-field">
+              <label for="c-name">Name</label>
+              <input id="c-name" type="text" maxlength="100" autocomplete="name" />
+              <p class="field-error" id="err-name" style="display:none"></p>
+            </div>
+            <div class="form-field">
+              <label for="c-email">Email</label>
+              <input id="c-email" type="email" maxlength="254" autocomplete="email" />
+              <p class="field-error" id="err-email" style="display:none"></p>
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="c-subject">Subject</label>
+            <input id="c-subject" type="text" maxlength="150" />
+            <p class="field-error" id="err-subject" style="display:none"></p>
+          </div>
+          <div class="form-field">
+            <label for="c-message">Message</label>
+            <textarea id="c-message" rows="5" maxlength="2000"></textarea>
+            <p class="field-error" id="err-message" style="display:none"></p>
+          </div>
+          <div class="form-actions">
+            <button type="submit" id="submitBtn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 3.5 21 12 4.5 20.5 8 12Z"/></svg>
+              <span id="submitLabel">Send Message</span>
+            </button>
+            <p class="form-status" id="formStatus" role="status" style="display:none"></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container-shell footer-top">
+    <div>
+      <div class="footer-brand">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m7 9 3 3-3 3"/><path d="M13 15h4"/></svg>
+        Md Saikot Mia
+      </div>
+      <p class="footer-title">CST Student | Cyber Security Learner | Networking Enthusiast</p>
+    </div>
+    <div class="footer-socials">
+      <a class="icon-btn" href="mailto:saikotpc@gmail.com" aria-label="Email" title="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
+      <a class="icon-btn" href="https://github.com/saikot0x" target="_blank" rel="noreferrer" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0.8C5.6 0.8 0.5 5.9 0.5 12.3c0 5.1 3.3 9.4 7.9 11 .6.1.8-.3.8-.6v-2.1c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11 11 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.6 7.9-5.9 7.9-11C23.5 5.9 18.4.8 12 .8Z"/></svg></a>
+      <a class="icon-btn" href="https://www.linkedin.com/in/saikot0x/" target="_blank" rel="noreferrer" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2ZM8.3 18.5H5.7V9.7h2.6v8.8ZM7 8.6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm11.5 9.9h-2.6v-4.3c0-1-.02-2.4-1.5-2.4-1.5 0-1.7 1.1-1.7 2.3v4.4H10V9.7h2.5v1.2h.03c.35-.65 1.2-1.4 2.5-1.4 2.7 0 3.2 1.8 3.2 4.1v5Z"/></svg></a>
+      <a class="icon-btn" href="https://tryhackme.com/p/saikot0x" target="_blank" rel="noreferrer" aria-label="TryHackMe" title="TryHackMe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1Z"/><path d="m9 12 2 2 4-4"/></svg></a>
+      <a class="icon-btn" href="[ADD_MEDIUM_URL]" target="_blank" rel="noreferrer" aria-label="Medium" title="Medium"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18H3a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2v13a3 3 0 0 0 3 3Z"/><path d="M18 14h1a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1"/><path d="M12 6h4"/><path d="M12 10h4"/><path d="M12 14h4"/><path d="M8 6h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg></a>
+      <a class="icon-btn" href="https://x.com/saikot_0x" target="_blank" rel="noreferrer" aria-label="X" title="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.3 2H21l-6.6 7.6L22.2 22h-6.8l-5.3-6.9L4 22H1.3l7.1-8.1L1 2h6.9l4.8 6.3L18.3 2Zm-1.2 18h1.5L7 4h-1.6l11.7 16Z"/></svg></a>
+      <a class="icon-btn" href="https://www.facebook.com/saikot0x" target="_blank" rel="noreferrer" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12.06C22 6.48 17.52 2 11.94 2S1.88 6.48 1.88 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.42V9.91c0-2.39 1.42-3.71 3.6-3.71 1.04 0 2.13.19 2.13.19v2.34h-1.2c-1.18 0-1.55.73-1.55 1.48v1.78h2.64l-.42 2.91h-2.22V22c4.78-.76 8.44-4.92 8.44-9.94Z"/></svg></a>
+      <a class="icon-btn" href="https://www.instagram.com/saikot0x" target="_blank" rel="noreferrer" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+    </div>
+  </div>
+  <div class="container-shell footer-bottom">
+    <p>© <span id="year"></span> Md Saikot Mia. All rights reserved.</p>
+    <p class="mono">Built with curiosity, discipline &amp; continuous learning.</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

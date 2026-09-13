@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://saikot0x.github.io/md-saikot-mia/sitemap.xml
