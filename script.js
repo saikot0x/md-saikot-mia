@@ -18,9 +18,9 @@
   // Templates / Account -> API Keys). The public key is meant to be visible
   // client-side — that's how EmailJS is designed to work.
   var EMAILJS_CONFIG = {
-    serviceId: "[ADD_EMAILJS_SERVICE_ID]",
-    templateId: "[ADD_EMAILJS_TEMPLATE_ID]",
-    publicKey: "[ADD_EMAILJS_PUBLIC_KEY]"
+    serviceId: "service_if6ksui",
+    templateId: "template_5xd8vcq",
+    publicKey: "BhfyVJrh9wBUxGG0x"
   };
   var emailjsConfigured =
     !isPlaceholderHref(EMAILJS_CONFIG.serviceId) &&
