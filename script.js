@@ -1,13 +1,22 @@
 (function () {
   "use strict";
 
-  var prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  /*
+    This file no longer stores any content (no project lists, skills, education
+    data, etc). Everything you see on the page lives directly in index.html now.
+    This script only handles behaviour: menu, scroll, typing effect, the
+    writeups filter, auto-disabling placeholder links, and the contact form.
+    You should not need to edit anything below to add content to the site.
+  */
 
   function isPlaceholderHref(href) {
     return !!href && href.indexOf("[ADD_") === 0;
   }
 
-  // ---------------- EmailJS setup (lazy-loaded only when the form is used) ----------------
+  // ---------------- EmailJS setup (one-time technical config, not content) ----------------
+  // Fill these in from your EmailJS account (emailjs.com -> Email Services / Email
+  // Templates / Account -> API Keys). The public key is meant to be visible
+  // client-side — that's how EmailJS is designed to work.
   var EMAILJS_CONFIG = {
     serviceId: "service_2nc9ou9",
     templateId: "template_5xd8vcq",
@@ -17,40 +26,8 @@
     !isPlaceholderHref(EMAILJS_CONFIG.serviceId) &&
     !isPlaceholderHref(EMAILJS_CONFIG.templateId) &&
     !isPlaceholderHref(EMAILJS_CONFIG.publicKey);
-
-  function loadEmailJs() {
-    if (!emailjsConfigured) {
-      return Promise.resolve(null);
-    }
-
-    if (window.emailjs) {
-      if (typeof window.emailjs.init === "function") {
-        window.emailjs.init({ publicKey: EMAILJS_CONFIG.publicKey });
-      }
-      return Promise.resolve(window.emailjs);
-    }
-
-    if (window.__emailjsPromise) {
-      return window.__emailjsPromise;
-    }
-
-    window.__emailjsPromise = new Promise(function (resolve, reject) {
-      var script = document.createElement("script");
-      script.src = "https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js";
-      script.async = true;
-      script.onload = function () {
-        if (typeof window.emailjs.init === "function") {
-          window.emailjs.init({ publicKey: EMAILJS_CONFIG.publicKey });
-        }
-        resolve(window.emailjs);
-      };
-      script.onerror = function () {
-        reject(new Error("EmailJS failed to load"));
-      };
-      document.head.appendChild(script);
-    });
-
-    return window.__emailjsPromise;
+  if (emailjsConfigured && window.emailjs) {
+    window.emailjs.init({ publicKey: EMAILJS_CONFIG.publicKey });
   }
 
   var ownerEmail = document.body.getAttribute("data-owner-email") || "";
@@ -74,21 +51,18 @@
   var menuIconClose = document.getElementById("menuIconClose");
 
   function closeMobileMenu() {
-    if (!mobileNav || !menuToggle) return;
     mobileNav.classList.remove("open");
-    if (menuIconOpen) menuIconOpen.style.display = "";
-    if (menuIconClose) menuIconClose.style.display = "none";
+    menuIconOpen.style.display = "";
+    menuIconClose.style.display = "none";
     menuToggle.setAttribute("aria-expanded", "false");
   }
 
-  if (menuToggle) {
-    menuToggle.addEventListener("click", function () {
-      var open = mobileNav.classList.toggle("open");
-      menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
-      if (menuIconOpen) menuIconOpen.style.display = open ? "none" : "";
-      if (menuIconClose) menuIconClose.style.display = open ? "" : "none";
-    });
-  }
+  menuToggle.addEventListener("click", function () {
+    var open = mobileNav.classList.toggle("open");
+    menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    menuIconOpen.style.display = open ? "none" : "";
+    menuIconClose.style.display = open ? "" : "none";
+  });
 
   document.addEventListener("click", function (e) {
     var a = e.target.closest("[data-nav]");
@@ -102,7 +76,6 @@
   /* ---------------- Header shrink + scroll spy ---------------- */
   var header = document.getElementById("siteHeader");
   function onScrollHeader() {
-    if (!header) return;
     if (window.scrollY > 24) header.classList.add("scrolled");
     else header.classList.remove("scrolled");
   }
@@ -116,110 +89,42 @@
     .map(function (h) { return h.slice(1); });
 
   function scrollSpy() {
-    var offset = 120;
-    var current = sectionIds[0] || "";
-
+    var offset = 120, current = sectionIds[0];
     for (var i = 0; i < sectionIds.length; i++) {
       var el = document.getElementById(sectionIds[i]);
       if (!el) continue;
       if (el.getBoundingClientRect().top - offset <= 0) current = sectionIds[i];
     }
-
     navAnchors.forEach(function (a) {
       var href = a.getAttribute("href") || "";
       a.classList.toggle("active", href === "#" + current);
     });
   }
-
-  var scrollRafId = null;
-  function scheduleScrollSpy() {
-    if (scrollRafId) return;
-    scrollRafId = window.requestAnimationFrame(function () {
-      scrollRafId = null;
-      scrollSpy();
-    });
-  }
-
-  scheduleScrollSpy();
-  window.addEventListener("scroll", scheduleScrollSpy, { passive: true });
+  scrollSpy();
+  window.addEventListener("scroll", scrollSpy, { passive: true });
 
   /* ---------------- Hero typing effect (words come from data-roles in HTML) ---------------- */
   (function typeLoop() {
     var roleEl = document.querySelector(".hero-role");
     var target = document.getElementById("typedRole");
     if (!roleEl || !target) return;
-
     var roles = (roleEl.getAttribute("data-roles") || "").split("|").map(function (s) { return s.trim(); }).filter(Boolean);
     if (!roles.length) return;
 
-    if (prefersReducedMotion) {
-      target.textContent = roles[0];
-      return;
-    }
-
-    var roleIndex = 0;
-    var text = "";
-    var deleting = false;
-    var loopTimer = null;
-
-    function clearLoop() {
-      if (loopTimer) {
-        clearTimeout(loopTimer);
-        loopTimer = null;
-      }
-    }
-
-    function scheduleNext(delay) {
-      if (document.hidden || prefersReducedMotion) {
-        target.textContent = roles[roleIndex];
-        return;
-      }
-      loopTimer = setTimeout(step, delay);
-    }
-
+    var roleIndex = 0, text = "", deleting = false;
     function step() {
-      if (document.hidden || prefersReducedMotion) {
-        target.textContent = roles[roleIndex];
-        return;
-      }
-
       var full = roles[roleIndex];
       var speed = deleting ? 35 : 55;
-
       if (!deleting) {
-        if (text.length < full.length) {
-          text = full.slice(0, text.length + 1);
-        } else {
-          clearLoop();
-          loopTimer = setTimeout(function () {
-            deleting = true;
-            step();
-          }, 1400);
-          target.textContent = text;
-          return;
-        }
-      } else if (text.length > 0) {
-        text = text.slice(0, text.length - 1);
+        if (text.length < full.length) { text = full.slice(0, text.length + 1); }
+        else { setTimeout(function () { deleting = true; step(); }, 1400); target.textContent = text; return; }
       } else {
-        deleting = false;
-        roleIndex = (roleIndex + 1) % roles.length;
+        if (text.length > 0) { text = text.slice(0, text.length - 1); }
+        else { deleting = false; roleIndex = (roleIndex + 1) % roles.length; }
       }
-
       target.textContent = text;
-      scheduleNext(speed);
+      setTimeout(step, speed);
     }
-
-    function handleVisibilityChange() {
-      if (document.hidden) {
-        clearLoop();
-        target.textContent = roles[roleIndex];
-      } else {
-        clearLoop();
-        step();
-      }
-    }
-
-    document.addEventListener("visibilitychange", handleVisibilityChange);
     step();
   })();
 
@@ -305,7 +210,6 @@
       };
       clearErrors();
       status.style.display = "none";
-
       var validationErrors = validate(sanitized);
       var hasErrors = Object.keys(validationErrors).length > 0;
       Object.keys(validationErrors).forEach(function (k) {
@@ -314,7 +218,7 @@
       });
       if (hasErrors) return;
 
-      if (!emailjsConfigured) {
+      if (!emailjsConfigured || !window.emailjs) {
         setStatus("warn", "Contact form isn't connected yet — email " + ownerEmail + " directly for now.");
         return;
       }
@@ -322,14 +226,12 @@
       submitBtn.disabled = true;
       submitLabel.textContent = "Sending…";
 
-      loadEmailJs()
-        .then(function () {
-          return window.emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, {
-            from_name: sanitized.name,
-            from_email: sanitized.email,
-            subject: sanitized.subject,
-            message: sanitized.message
-          });
+      window.emailjs
+        .send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, {
+          from_name: sanitized.name,
+          from_email: sanitized.email,
+          subject: sanitized.subject,
+          message: sanitized.message
         })
         .then(function () {
           setStatus("ok", "Message sent — thanks, I'll reply soon.");

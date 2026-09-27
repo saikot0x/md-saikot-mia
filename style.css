@@ -44,7 +44,6 @@
         transition-duration: 0.001ms !important;
         scroll-behavior: auto !important;
       }
-      .pulse-dot, .dash-flow, .fade-up, .caret { animation: none !important; }
     }
 
     .container-shell {
@@ -106,7 +105,8 @@
     }
     header.site-header.scrolled {
       padding: 0.625rem 0;
-      background-color: rgba(10, 14, 19, 0.94);
+      background-color: rgba(10, 14, 19, 0.9);
+      backdrop-filter: blur(8px);
       border-bottom-color: var(--color-border);
     }
     .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
