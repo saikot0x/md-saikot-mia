@@ -64,8 +64,17 @@
   function initLoader() {
     const loader = $('#loader');
     if (!loader) return;
+    if (document.documentElement.classList.contains('intro-seen')) {
+      loader.remove();
+      return;
+    }
     let done = false;
-    const finish = () => { if (done) return; done = true; finishLoader(); };
+    const finish = () => {
+      if (done) return;
+      done = true;
+      if (!state.reduced) store.set('introSeen', true);
+      finishLoader();
+    };
     const skip = $('#skipIntro');
     if (skip) skip.addEventListener('click', finish);
     if (state.reduced) return finish();
@@ -1095,19 +1104,29 @@
     const box = $('#contactChannels');
     if (!box) return;
     const P = D.PROFILE || {};
-    
 
+    const icons = {
+      email: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>',
+      linkedin: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2ZM8.3 18.5H5.7V9.7h2.6v8.8ZM7 8.6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm11.5 9.9h-2.6v-4.3c0-1-.02-2.4-1.5-2.4-1.5 0-1.7 1.1-1.7 2.3v4.4H10V9.7h2.5v1.2h.03c.35-.65 1.2-1.4 2.5-1.4 2.7 0 3.2 1.8 3.2 4.1v5Z"/></svg>',
+      github: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .8C5.6.8.5 5.9.5 12.3c0 5.1 3.3 9.4 7.9 11 .6.1.8-.3.8-.6v-2.1c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11 11 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.6 7.9-5.9 7.9-11C23.5 5.9 18.4.8 12 .8Z"/></svg>',
+      tryhackme: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M10.705 0C7.54 0 4.902 2.285 4.349 5.291a4.525 4.525 0 0 0-4.107 4.5 4.525 4.525 0 0 0 4.52 4.52h6.761a.625.625 0 1 0 0-1.25H4.761a3.273 3.273 0 0 1-3.27-3.27A3.273 3.273 0 0 1 6.59 7.08a.625.625 0 0 0 .7-1.035 4.488 4.488 0 0 0-1.68-.69 5.223 5.223 0 0 1 5.096-4.104 5.221 5.221 0 0 1 5.174 4.57.625.625 0 1 0 1.243-.145A6.47 6.47 0 0 0 10.705 0z"/></svg>',
+      medium: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.21 0A4.201 4.201 0 0 0 0 4.21v15.58A4.201 4.201 0 0 0 4.21 24h15.58A4.201 4.201 0 0 0 24 19.79v-1.093a4.2 4.2 0 0 1-.422.02c-2.577 0-4.027-2.146-4.09-4.832-.063-2.697 1.25-4.685 3.189-5.196.469-.237 1.127-.367 1.664-.367h.023c.021 0 .042.002.063.002V4.21A4.201 4.201 0 0 0 20.21 0ZM4.408 5.583h4.165l3.588 8.435 3.59-8.435h3.864v.146l-.019.004c-.705.16-1.063.397-1.063 1.254h-.003l.003 10.274c.06.676.424.885 1.063 1.03l.02.004v.145h-4.923v-.145l.019-.005c.639-.144.994-.353 1.054-1.03V7.267l-4.745 11.15h-.261L6.15 7.569v9.445c0 .857.358 1.094 1.063 1.253l.02.004v.147H4.405v-.147l.019-.004c.705-.16 1.065-.397 1.065-1.253V6.987c0-.857-.358-1.094-1.064-1.254l-.018-.004z"/></svg>',
+      x: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/></svg>',
+      facebook: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12.06C22 6.48 17.52 2 11.94 2S1.88 6.48 1.88 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.42V9.91c0-2.39 1.42-3.71 3.6-3.71 1.04 0 2.13.19 2.13.19v2.34h-1.2c-1.18 0-1.55.73-1.55 1.48v1.78h2.64l-.42 2.91h-2.22V22c4.78-.76 8.44-4.92 8.44-9.94Z"/></svg>',
+      instagram: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".75" fill="currentColor" stroke="none"/></svg>',
+      youtube: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6z"/></svg>'
+    };
     const tail = (u) => { try { return '@' + decodeURIComponent(u.replace(/\/+$/, '').split('/').pop()); } catch { return ''; } };
     const channels = [];
-    if (P.email) channels.push({ icon: '✉', name: 'Email', meta: P.email, href: 'mailto:' + P.email, note: 'Send an email', mail: true });
-    if (P.linkedin) channels.push({ icon: '◈', name: 'LinkedIn', meta: tail(P.linkedin), href: P.linkedin, note: 'Professional profile' });
-    if (P.github) channels.push({ icon: '⌥', name: 'GitHub', meta: tail(P.github), href: P.github, note: 'Code and projects' });
-    if (P.tryhackme) channels.push({ icon: '◆', name: 'TryHackMe', meta: tail(P.tryhackme), href: P.tryhackme, note: 'Security lab progress' });
-    if (P.medium) channels.push({ icon: '✎', name: 'Medium', meta: tail(P.medium), href: P.medium, note: 'Articles and writeups' });
-    if (P.x) channels.push({ icon: '𝕏', name: 'X', meta: tail(P.x), href: P.x, note: 'Updates on X' });
-    if (P.facebook) channels.push({ icon: '◉', name: 'Facebook', meta: tail(P.facebook), href: P.facebook, note: 'Facebook profile' });
-    if (P.instagram) channels.push({ icon: '◎', name: 'Instagram', meta: tail(P.instagram), href: P.instagram, note: 'Instagram profile' });
-    if (P.youtube) channels.push({ icon: '▶', name: 'YouTube', meta: tail(P.youtube), href: P.youtube, note: 'YouTube channel' });
+    if (P.email) channels.push({ icon: icons.email, name: 'Email', meta: P.email, href: 'mailto:' + P.email, note: 'Send an email', mail: true });
+    if (P.linkedin) channels.push({ icon: icons.linkedin, name: 'LinkedIn', meta: tail(P.linkedin), href: P.linkedin, note: 'Professional profile' });
+    if (P.github) channels.push({ icon: icons.github, name: 'GitHub', meta: tail(P.github), href: P.github, note: 'Code and projects' });
+    if (P.tryhackme) channels.push({ icon: icons.tryhackme, name: 'TryHackMe', meta: tail(P.tryhackme), href: P.tryhackme, note: 'Security lab progress' });
+    if (P.medium) channels.push({ icon: icons.medium, name: 'Medium', meta: tail(P.medium), href: P.medium, note: 'Articles and writeups' });
+    if (P.x) channels.push({ icon: icons.x, name: 'X', meta: tail(P.x), href: P.x, note: 'Updates on X' });
+    if (P.facebook) channels.push({ icon: icons.facebook, name: 'Facebook', meta: tail(P.facebook), href: P.facebook, note: 'Facebook profile' });
+    if (P.instagram) channels.push({ icon: icons.instagram, name: 'Instagram', meta: tail(P.instagram), href: P.instagram, note: 'Instagram profile' });
+    if (P.youtube) channels.push({ icon: icons.youtube, name: 'YouTube', meta: tail(P.youtube), href: P.youtube, note: 'YouTube channel' });
     box.innerHTML = '';
     const h = document.createElement('h3');
     h.className = 'mono';
@@ -1121,7 +1140,7 @@
       const i = document.createElement('span');
       i.className = 'cl-icon';
       i.setAttribute('aria-hidden', 'true');
-      i.textContent = c.icon;
+      i.innerHTML = c.icon;
       const wrap = document.createElement('div');
       const b = document.createElement('b');
       b.textContent = c.name;

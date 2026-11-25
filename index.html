@@ -48,6 +48,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script>
+  try {
+    if (localStorage.getItem('nf_introSeen') === 'true') {
+      document.documentElement.classList.add('intro-seen');
+    }
+  } catch {}
+</script>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -404,7 +411,7 @@
           <p class="project-desc">Working through Nmap scan types, timing options and service detection with real examples from lab practice.</p>
           <div class="project-tags"><span>#nmap</span><span>#port-scanning</span><span>#recon</span></div>
           <div class="project-actions">
-            <span class="pbtn" aria-disabled="true">Publishing soon</span>
+            <a class="pbtn primary" href="https://example.com/nmap-port-scanning-writeup" target="_blank" rel="noopener noreferrer">Read More ↗</a>
           </div>
         </div>
       </article>
@@ -543,7 +550,7 @@
     <p class="built mono">Built in the shadows. 🦇</p>
   </div>
   <button type="button" id="backTop" aria-label="Back to top" class="back-top">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 3.2A9.6 9.6 0 1 0 20.8 14 7.6 7.6 0 0 1 16.6 3.2Z" fill="currentColor"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
   </button>
 </footer>
 
