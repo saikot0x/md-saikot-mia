@@ -5,11 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Md Saikot Mia | Cyber Security &amp; Networking Portfolio</title>
 <meta name="description" content="Md Saikot Mia (saikot0x) — CST student focusing on Networking &amp; Cyber Security. Projects, TryHackMe lab progress and practical security skills.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://api.emailjs.com; media-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="author" content="Md Saikot Mia">
 <meta name="robots" content="index, follow">
 <meta name="google-site-verification" content="RJiFI4bBw0iD-FWFPXMxymHYmJa9s7p_y1JapLBj4iA">
 <link rel="canonical" href="https://saikot0x.github.io/md-saikot-mia/">
-<meta name="theme-color" content="#070709">
+<meta name="theme-color" content="#f3efe6">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://saikot0x.github.io/md-saikot-mia/">
 <meta property="og:title" content="Md Saikot Mia | Cyber Security &amp; Networking Portfolio">
@@ -18,11 +20,15 @@
 <meta property="og:image" content="https://saikot0x.github.io/md-saikot-mia/images/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Md Saikot Mia — CST student, Networking to Cyber Security portfolio">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Md Saikot Mia | Cyber Security &amp; Networking Portfolio">
 <meta name="twitter:description" content="CST student building a career path from Networking into Cyber Security.">
 <meta name="twitter:image" content="https://saikot0x.github.io/md-saikot-mia/images/og-image.png">
-<link rel="icon" type="image/jpeg" href="images/favicon.jpg" sizes="460x460">
+<meta name="twitter:image:alt" content="Md Saikot Mia — CST student, Networking to Cyber Security portfolio">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="icon" type="image/jpeg" href="images/favicon.jpg">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -48,13 +54,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<script>
-  try {
-    if (localStorage.getItem('nf_introSeen') === 'true') {
-      document.documentElement.classList.add('intro-seen');
-    }
-  } catch {}
-</script>
+<script src="js/early.js"></script>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -102,6 +102,9 @@
       <a href="#contact" class="nav-link">Contact</a>
     </nav>
     <div class="nav-actions">
+      <button type="button" class="theme-switch" id="themeBtn" aria-pressed="false" aria-label="Switch to original night theme" title="Switch to original night theme">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"/></svg>
+      </button>
       <span class="status-badge" id="statusBadge"><span class="status-dot" aria-hidden="true"></span><span id="statusText">Available</span></span>
       <button type="button" class="hamburger" id="hamburger" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
         <span></span><span></span><span></span>
@@ -169,13 +172,13 @@
         </a>
       </div>
       <div class="hero-socials" role="group" aria-label="Social profiles">
-        <a class="icon-btn" href="https://github.com/saikot0x" target="_blank" rel="noreferrer" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0.8C5.6 0.8 0.5 5.9 0.5 12.3c0 5.1 3.3 9.4 7.9 11 .6.1.8-.3.8-.6v-2.1c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11 11 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.6 7.9-5.9 7.9-11C23.5 5.9 18.4.8 12 .8Z"/></svg></a>
-        <a class="icon-btn" href="https://www.linkedin.com/in/saikot0x/" target="_blank" rel="noreferrer" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2ZM8.3 18.5H5.7V9.7h2.6v8.8ZM7 8.6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm11.5 9.9h-2.6v-4.3c0-1-.02-2.4-1.5-2.4-1.5 0-1.7 1.1-1.7 2.3v4.4H10V9.7h2.5v1.2h.03c.35-.65 1.2-1.4 2.5-1.4 2.7 0 3.2 1.8 3.2 4.1v5Z"/></svg></a>
-        <a class="icon-btn" href="https://tryhackme.com/p/saikot0x" target="_blank" rel="noreferrer" aria-label="TryHackMe" title="TryHackMe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1Z"/><path d="m9 12 2 2 4-4"/></svg></a>
-        <a class="icon-btn" href="https://medium.com/@saikot0x" target="_blank" rel="noreferrer" aria-label="Medium" title="Medium"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18H3a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2v13a3 3 0 0 0 3 3Z"/><path d="M18 14h1a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1"/><path d="M12 6h4"/><path d="M12 10h4"/><path d="M12 14h4"/><path d="M8 6h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg></a>
-        <a class="icon-btn" href="https://x.com/saikot_0x" target="_blank" rel="noreferrer" aria-label="X" title="X"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.3 2H21l-6.6 7.6L22.2 22h-6.8l-5.3-6.9L4 22H1.3l7.1-8.1L1 2h6.9l4.8 6.3L18.3 2Zm-1.2 18h1.5L7 4h-1.6l11.7 16Z"/></svg></a>
-        <a class="icon-btn" href="https://www.facebook.com/saikot0x" target="_blank" rel="noreferrer" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12.06C22 6.48 17.52 2 11.94 2S1.88 6.48 1.88 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.42V9.91c0-2.39 1.42-3.71 3.6-3.71 1.04 0 2.13.19 2.13.19v2.34h-1.2c-1.18 0-1.55.73-1.55 1.48v1.78h2.64l-.42 2.91h-2.22V22c4.78-.76 8.44-4.92 8.44-9.94Z"/></svg></a>
-        <a class="icon-btn" href="https://www.instagram.com/saikot0x" target="_blank" rel="noreferrer" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a class="icon-btn" href="https://github.com/saikot0x" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0.8C5.6 0.8 0.5 5.9 0.5 12.3c0 5.1 3.3 9.4 7.9 11 .6.1.8-.3.8-.6v-2.1c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11 11 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.6 7.9-5.9 7.9-11C23.5 5.9 18.4.8 12 .8Z"/></svg></a>
+        <a class="icon-btn" href="https://www.linkedin.com/in/saikot0x/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2ZM8.3 18.5H5.7V9.7h2.6v8.8ZM7 8.6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm11.5 9.9h-2.6v-4.3c0-1-.02-2.4-1.5-2.4-1.5 0-1.7 1.1-1.7 2.3v4.4H10V9.7h2.5v1.2h.03c.35-.65 1.2-1.4 2.5-1.4 2.7 0 3.2 1.8 3.2 4.1v5Z"/></svg></a>
+        <a class="icon-btn" href="https://tryhackme.com/p/saikot0x" target="_blank" rel="noopener noreferrer" aria-label="TryHackMe" title="TryHackMe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1Z"/><path d="m9 12 2 2 4-4"/></svg></a>
+        <a class="icon-btn" href="https://medium.com/@saikot0x" target="_blank" rel="noopener noreferrer" aria-label="Medium" title="Medium"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18H3a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2v13a3 3 0 0 0 3 3Z"/><path d="M18 14h1a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1"/><path d="M12 6h4"/><path d="M12 10h4"/><path d="M12 14h4"/><path d="M8 6h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg></a>
+        <a class="icon-btn" href="https://x.com/saikot_0x" target="_blank" rel="noopener noreferrer" aria-label="X" title="X"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.3 2H21l-6.6 7.6L22.2 22h-6.8l-5.3-6.9L4 22H1.3l7.1-8.1L1 2h6.9l4.8 6.3L18.3 2Zm-1.2 18h1.5L7 4h-1.6l11.7 16Z"/></svg></a>
+        <a class="icon-btn" href="https://www.facebook.com/saikot0x" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12.06C22 6.48 17.52 2 11.94 2S1.88 6.48 1.88 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.42V9.91c0-2.39 1.42-3.71 3.6-3.71 1.04 0 2.13.19 2.13.19v2.34h-1.2c-1.18 0-1.55.73-1.55 1.48v1.78h2.64l-.42 2.91h-2.22V22c4.78-.76 8.44-4.92 8.44-9.94Z"/></svg></a>
+        <a class="icon-btn" href="https://www.instagram.com/saikot0x" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
       </div>
     </div>
   </div>
@@ -295,10 +298,10 @@
       </aside>
     </div>
     <ul class="skills-legend" aria-label="Skill level legend">
-      <li><span class="leg-dot practical" aria-hidden="true"></span>Practical</li>
-      <li><span class="leg-dot intermediate" aria-hidden="true"></span>Intermediate</li>
-      <li><span class="leg-dot familiar" aria-hidden="true"></span>Familiar</li>
-      <li><span class="leg-dot learning" aria-hidden="true"></span>Learning</li>
+      <li class="level-practical"><span class="leg-dot practical" aria-hidden="true"></span>Practical</li>
+      <li class="level-intermediate"><span class="leg-dot intermediate" aria-hidden="true"></span>Intermediate</li>
+      <li class="level-familiar"><span class="leg-dot familiar" aria-hidden="true"></span>Familiar</li>
+      <li class="level-learning"><span class="leg-dot learning" aria-hidden="true"></span>Learning</li>
     </ul>
   </div>
 </section>
@@ -374,7 +377,7 @@
   4. When the article is published, replace  <span class="pbtn" aria-disabled="true">Publishing soon</span>
      with  <a class="pbtn primary" href="YOUR-LINK" target="_blank" rel="noopener noreferrer">Read More ↗</a>
 -->
-<section id="writeups" class="section writeups" aria-label="Writeups" aria-labelledby="writeupsTitle">
+<section id="writeups" class="section writeups" aria-labelledby="writeupsTitle">
   <div class="container">
     <div class="section-head reveal">
       <h2 class="section-title" id="writeupsTitle">Writeups</h2>
@@ -411,7 +414,7 @@
           <p class="project-desc">Working through Nmap scan types, timing options and service detection with real examples from lab practice.</p>
           <div class="project-tags"><span>#nmap</span><span>#port-scanning</span><span>#recon</span></div>
           <div class="project-actions">
-            <span class="pbtn" aria-disabled="true">Publishing soon</span>
+            <a class="pbtn primary" href="https://github.com/saikot0x" target="_blank" rel="noopener noreferrer">Read on GitHub ↗</a>
           </div>
         </div>
       </article>
@@ -488,12 +491,12 @@
       <form class="contact-form reveal" id="contactForm" novalidate>
         <div class="form-field">
           <label for="cfName">Name</label>
-          <input type="text" id="cfName" name="name" required minlength="2" autocomplete="name" placeholder="Your name">
+          <input type="text" id="cfName" name="name" required minlength="2" maxlength="80" autocomplete="name" placeholder="Your name">
           <p class="field-error" id="errName" role="alert" hidden></p>
         </div>
         <div class="form-field">
           <label for="cfEmail">Email</label>
-          <input type="email" id="cfEmail" name="email" required autocomplete="email" placeholder="your@example.com">
+          <input type="email" id="cfEmail" name="email" required maxlength="120" autocomplete="email" placeholder="your@example.com">
           <p class="field-error" id="errEmail" role="alert" hidden></p>
         </div>        <div class="form-field">
           <label for="cfType">Subject</label>
@@ -509,8 +512,12 @@
         </div>
         <div class="form-field">
           <label for="cfMsg">Message</label>
-          <textarea id="cfMsg" name="message" rows="5" required minlength="10" placeholder="Write your message here."></textarea>
+          <textarea id="cfMsg" name="message" rows="5" required minlength="10" maxlength="2000" placeholder="Write your message here."></textarea>
           <p class="field-error" id="errMsg" role="alert" hidden></p>
+        </div>
+        <div class="hp-field" aria-hidden="true">
+          <label for="cfWebsite">Leave this field empty</label>
+          <input type="text" id="cfWebsite" name="website" tabindex="-1" autocomplete="off">
         </div>
         <button type="submit" class="btn btn-primary btn-wide">Send Message</button>
         <p class="form-note mono">Your message will be sent securely via EmailJS.</p>
@@ -529,7 +536,6 @@
       <p class="footer-name">Md Saikot Mia <span class="mono">/ saikot0x</span></p>
       <p class="footer-role mono">CST Student • Networking Enthusiast • Cyber Security Learner</p>
       <p class="footer-quote" id="footerQuote"></p>
-      <p class="moon-phase mono" id="moonPhase" title="Current moon phase, computed locally"></p>
     </div>
     <nav class="footer-nav" aria-label="Footer">
       <a href="#home">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#experience">Experience</a><a href="#certifications">Certifications</a><a href="#writeups">Writeups</a><a href="#contact">Contact</a>
@@ -561,8 +567,8 @@
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4.4.1/dist/email.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="js/data.js"></script>
-<script src="js/main.js"></script>
+<script src="js/main.js?v=2"></script>
 </body>
 </html>

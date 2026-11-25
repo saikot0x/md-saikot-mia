@@ -12,6 +12,13 @@
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
   const esc = (s) => String(s).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+  // Only allow plain http(s) links; anything else (javascript:, data:, ...) becomes '#'.
+  const safeUrl = (u) => {
+    try { const x = new URL(String(u), location.href); return /^https?:$/.test(x.protocol) ? x.href : '#'; }
+    catch { return '#'; }
+  };
+  const num = (n) => (Number.isFinite(+n) ? +n : 0);
+  const slug = (t) => String(t).toLowerCase().replace(/[^a-z0-9_-]/g, '');
 
   
 
@@ -115,7 +122,9 @@
     const spy = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (!e.isIntersecting) return;
-        links.forEach(l => l.classList.toggle('is-active', l.getAttribute('href') === '#' + e.target.id));
+        const target = '#' + e.target.id;
+        if (!links.some(l => l.getAttribute('href') === target)) return;
+        links.forEach(l => l.classList.toggle('is-active', l.getAttribute('href') === target));
       });
     }, { rootMargin: '-40% 0px -55% 0px' });
     sections.forEach(s => spy.observe(s));
@@ -125,10 +134,20 @@
   function initToggles() {
     const themeBtn = $('#themeBtn'), perfBtn = $('#perfBtn'), motionBtn = $('#motionBtn');
     const setPressed = (btn, on) => btn && btn.setAttribute('aria-pressed', String(on));
-    if (store.get('bloodMoon', false)) { document.body.classList.add('blood-moon'); setPressed(themeBtn, true); }
+    const setThemeButton = on => {
+      setPressed(themeBtn, on);
+      if (themeBtn) {
+        const label = on ? 'Switch to warm paper theme' : 'Switch to original night theme';
+        themeBtn.setAttribute('aria-label', label);
+        themeBtn.title = label;
+      }
+    };
+    const nightTheme = store.get('bloodMoon', false);
+    document.body.classList.toggle('blood-moon', nightTheme);
+    setThemeButton(nightTheme);
     themeBtn && themeBtn.addEventListener('click', () => {
       const on = document.body.classList.toggle('blood-moon');
-      store.set('bloodMoon', on); setPressed(themeBtn, on);
+      store.set('bloodMoon', on); setThemeButton(on);
       
 
 
@@ -190,13 +209,13 @@
       `<li><span class="f-label">${esc(f.label)}</span><span class="f-value">${esc(f.value)}</span></li>`).join('');
     const cp = $('#corePrinciples');
     if (cp && D.PROFILE) cp.innerHTML = D.PROFILE.principles.map(p =>
-      `<div class="principle"><span class="p-icon" aria-hidden="true">${p.icon}</span><span><b>${esc(p.title)}</b><p>${esc(p.text)}</p></span></div>`).join('');
+      `<div class="principle"><span class="p-icon" aria-hidden="true">${esc(p.icon)}</span><span><b>${esc(p.title)}</b><p>${esc(p.text)}</p></span></div>`).join('');
     const v = $('#vials');
     if (v && D.PROFILE) {
       D.PROFILE.vials.forEach(x => {
         const row = document.createElement('div');
         row.className = 'vial-row';
-        row.innerHTML = `<span class="vial-label">${esc(x.label)}</span><span class="vial-track"><span class="vial-fill" data-v="${x.value}"></span></span><span class="vial-val">${x.value}%</span>`;
+        row.innerHTML = `<span class="vial-label">${esc(x.label)}</span><span class="vial-track"><span class="vial-fill" data-v="${num(x.value)}"></span></span><span class="vial-val">${num(x.value)}%</span>`;
         v.appendChild(row);
       });
       const vio = new IntersectionObserver(es => {
@@ -256,7 +275,7 @@
           </div>
           <ul class="skill-group-grid">
             ${skills.map(s => `
-              <li class="skill-pill status-${esc(s.status.toLowerCase())}" style="--i:${skills.indexOf(s)}"
+              <li class="skill-pill status-${slug(s.status)}" style="--i:${skills.indexOf(s)}"
                   title="${esc(`${s.desc} ${s.status} — ${s.level}%`)}"
                   aria-label="${esc(`${s.name}: ${s.status}, ${s.level}%. ${s.desc}`)}">${esc(s.name)}</li>`).join('')}
           </ul>
@@ -489,9 +508,9 @@
       const conns = [...adj[i]].map(x => skills[x].name);
       readout.innerHTML = `
         <div class="cg-readout-head">
-          <span class="cg-readout-icon" aria-hidden="true">${s.icon}</span>
+          <span class="cg-readout-icon" aria-hidden="true">${esc(s.icon)}</span>
           <span class="cg-readout-name">${esc(s.name)}</span>
-          <span class="cg-readout-level">${s.level}%</span>
+          <span class="cg-readout-level">${num(s.level)}%</span>
         </div>
         <p class="cg-readout-desc">${esc(s.desc)}</p>
         <div class="cg-readout-tools">${s.tools.map(t => `<span>${esc(t)}</span>`).join('')}</div>
@@ -601,8 +620,8 @@
     const cat = (D.PROJECT_CATS && D.PROJECT_CATS[p.cat]) || p.cat;
     const status = (p.status || '').toLowerCase();
     return `
-      <article class="project-card reveal" data-cat="${p.cat}" tabindex="0" role="button" aria-haspopup="dialog" aria-label="${esc(p.name)} case study">
-        <div class="project-thumb"><span class="pt-number">// ${String(i + 1).padStart(2, '0')}</span><span class="pt-status ${status}">${esc(p.status)}</span><span class="pt-glyph" aria-hidden="true">${p.icon}</span></div>
+      <article class="project-card reveal" data-cat="${esc(p.cat)}">
+        <div class="project-thumb"><span class="pt-number">// ${String(i + 1).padStart(2, '0')}</span><span class="pt-status ${slug(status)}">${esc(p.status)}</span><span class="pt-glyph" aria-hidden="true">${esc(p.icon)}</span></div>
         ${p.fork ? `<p class="fork-flag" title="${esc(p.upstream ? 'Fork of ' + p.upstream : 'A fork, not original work')}"><span aria-hidden="true">⑂</span> FORK${p.upstream ? ' — ' + esc(p.upstream) : ''}</p>` : ''}
         <div class="project-body">
           <p class="project-cat">${esc(cat)}</p>
@@ -611,8 +630,8 @@
           <p class="project-desc">${esc(p.desc)}</p>
           <div class="project-tags">${p.tags.map(t => `<span>#${esc(t)}</span>`).join('')}</div>
           <div class="project-actions">
-            <button type="button" class="pbtn primary" data-cs="${i}">View Case Study</button>
-            <a class="pbtn" href="${p.url}" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+            <button type="button" class="pbtn primary" data-cs="${i}" aria-haspopup="dialog" aria-label="View case study: ${esc(p.name)}">View Case Study</button>
+            <a class="pbtn" href="${esc(safeUrl(p.url))}" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
           </div>
         </div>
       </article>`;
@@ -623,7 +642,7 @@
     const featured = D.PROJECTS.map((p, i) => ({ p, i })).filter(x => x.p.featured);
     grid.innerHTML = featured.map(x => projectCard(x.p, x.i)).join('');
     if (archive) archive.innerHTML = D.PROJECTS.map((p) =>
-      `<a class="archive-card" href="${p.url}" target="_blank" rel="noopener noreferrer"><span class="ac-head"><span class="ac-name">${p.icon} ${esc(p.name)}${p.fork ? ' <em class="ac-fork">FORK</em>' : ''}</span><span class="ac-stars">★ ${p.stars}</span></span><span class="ac-desc">${esc(p.desc)}</span></a>`).join('');
+      `<a class="archive-card" href="${esc(safeUrl(p.url))}" target="_blank" rel="noopener noreferrer"><span class="ac-head"><span class="ac-name">${esc(p.icon)} ${esc(p.name)}${p.fork ? ' <em class="ac-fork">FORK</em>' : ''}</span><span class="ac-stars">★ ${num(p.stars)}</span></span><span class="ac-desc">${esc(p.desc)}</span></a>`).join('');
     $$('#filterBar .filter-btn').forEach(btn => btn.addEventListener('click', () => {
       $$('#filterBar .filter-btn').forEach(b => b.classList.remove('is-active'));
       btn.classList.add('is-active');
@@ -631,8 +650,8 @@
       applyFilter();
     }));
     $$('.project-card', grid).forEach(card => {
-      card.addEventListener('click', e => { if (!e.target.closest('a')) openModal(card); });
-      card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(card); } });
+      // Mouse convenience only; keyboard and screen-reader users use the real "View Case Study" button.
+      card.addEventListener('click', e => { if (!e.target.closest('a, button')) openModal(card); });
     });
     $$('.pbtn[data-cs]', grid).forEach(b => b.addEventListener('click', e => { e.stopPropagation(); openModal(b.closest('.project-card')); }));
     applyFilter();
@@ -668,7 +687,7 @@
       ${cs.lessons ? `<div class="ms-section"><h4>Lessons Learned</h4><p>${esc(cs.lessons)}</p></div>` : ''}
       ${cs.disclosure ? `<div class="ms-section ms-disclosure">🕊 ${esc(cs.disclosure)}</div>` : ''}
       <div class="ms-section"><h4>Tools &amp; Tags</h4><div class="ms-tools">${pr.tags.map(t => `<span>${esc(t)}</span>`).join('')}</div></div>
-      <div class="ms-links"><a class="btn btn-primary" href="${pr.url}" target="_blank" rel="noopener noreferrer">Open on GitHub ↗</a></div>`;
+      <div class="ms-links"><a class="btn btn-primary" href="${esc(safeUrl(pr.url))}" target="_blank" rel="noopener noreferrer">Open on GitHub ↗</a></div>`;
     lastFocus = document.activeElement;
     overlay.hidden = false;
     requestAnimationFrame(() => overlay.classList.add('open'));
@@ -706,7 +725,7 @@
     const list = $('#huntStages');
     if (!list || !D.HUNT_CYCLE) return;
     list.innerHTML = D.HUNT_CYCLE.map(s =>
-      `<li class="hunt-stage" tabindex="0"><span class="hs-dot" aria-hidden="true">${s.icon}</span><span class="hs-n mono">STAGE ${s.n}</span><span class="hs-name">${esc(s.name)}</span><p class="hs-text">${esc(s.text)}</p></li>`).join('');
+      `<li class="hunt-stage" tabindex="0"><span class="hs-dot" aria-hidden="true">${esc(s.icon)}</span><span class="hs-n mono">STAGE ${s.n}</span><span class="hs-name">${esc(s.name)}</span><p class="hs-text">${esc(s.text)}</p></li>`).join('');
     const fill = $('#threadFill'), marker = $('#huntMarker');
     if (!fill || state.reduced) return;
     const io = new IntersectionObserver(es => {
@@ -759,7 +778,7 @@
     const row = $('#statsRow');
     if (row && D.STATS) {
       row.innerHTML = D.STATS.map(s =>
-        `<div class="stat"><b data-count="${s.value}" data-suffix="${s.suffix || ''}">0${s.suffix || ''}</b><span>${esc(s.label)}${s.placeholder ? ' <em>[' + esc(s.placeholder) + ']</em>' : ''}</span></div>`).join('');
+        `<div class="stat"><b data-count="${num(s.value)}" data-suffix="${esc(s.suffix || '')}">0${esc(s.suffix || '')}</b><span>${esc(s.label)}${s.placeholder ? ' <em>[' + esc(s.placeholder) + ']</em>' : ''}</span></div>`).join('');
       const io = new IntersectionObserver(es => {
         if (!es[0].isIntersecting) return;
         io.disconnect();
@@ -787,14 +806,14 @@
     if (bg && D.CERTS) bg.innerHTML = D.CERTS.map(c => {
       if (c.sealed) {
         return `<div class="badge badge-sealed reveal">
-          <span class="badge-icon" aria-hidden="true">${c.icon}</span>
+          <span class="badge-icon" aria-hidden="true">${esc(c.icon)}</span>
           <b>${esc(c.title)}</b>
           <p class="b-meta">${esc(c.target || 'Certification track')}</p>
           <span class="stamp stamp-sealed">Sealed — pending verification</span>
         </div>`;
       }
       return `<div class="badge reveal">
-        <span class="badge-icon" aria-hidden="true">${c.icon}</span>
+        <span class="badge-icon" aria-hidden="true">${esc(c.icon)}</span>
         <b>${esc(c.title)}</b>
         <p class="b-meta">${esc(c.issuer || '')}${c.date ? ' · ' + esc(c.date) : ''}</p>
         ${c.verify ? `<a class="b-verify" href="${esc(c.verify)}" target="_blank" rel="noopener noreferrer">VERIFY ↗</a>` : ''}
@@ -802,7 +821,7 @@
     }).join('');
     const tb = $('#thmBadges');
     if (tb && D.THM_BADGES) tb.innerHTML = D.THM_BADGES.map(b =>
-      `<li><span aria-hidden="true">${b.icon}</span>${esc(b.name)}</li>`).join('');
+      `<li><span aria-hidden="true">${esc(b.icon)}</span>${esc(b.name)}</li>`).join('');
   }
 
    
@@ -1038,6 +1057,7 @@
       f.err.textContent = ok ? '' : f.msg;
       f.el.setAttribute('aria-invalid', String(!ok));
     };
+    let lastSend = 0;
     Object.values(fields).forEach(f => f.el.addEventListener('input', () => show(f, f.test(f.el.value))));
     form.addEventListener('submit', async e => {
       e.preventDefault();
@@ -1054,6 +1074,19 @@
         first && first.focus();
         return;
       }
+      // Bot trap: real people never see or fill this field. Pretend success, send nothing.
+      const trap = $('#cfWebsite');
+      if (trap && trap.value.trim() !== '') {
+        form.reset();
+        if (s) { s.classList.remove('is-error'); s.textContent = 'Your message was sent. Thank you for reaching out.'; s.hidden = false; }
+        return;
+      }
+      // Simple client-side throttle (30s) to stop accidental or scripted double-sends.
+      const now = Date.now();
+      if (now - lastSend < 30000) {
+        if (s) { s.classList.add('is-error'); s.textContent = 'Please wait a few seconds before sending another message.'; s.hidden = false; }
+        return;
+      }
       if (s) {
         s.classList.remove('is-error');
         s.textContent = 'Sending your message…';
@@ -1066,6 +1099,7 @@
           throw new Error('EmailJS failed to load.');
         }
         await emailjs.sendForm(emailjsConfig.serviceId, emailjsConfig.templateId, form);
+        lastSend = Date.now();
         form.reset();
         Object.values(fields).forEach(f => show(f, true));
         if (s) {
@@ -1080,6 +1114,7 @@
         }
       } finally {
         if (submitBtn) submitBtn.disabled = false;
+        if (note) note.hidden = false;
         if (s) s.scrollIntoView({ block: 'nearest', behavior: state.reduced ? 'auto' : 'smooth' });
       }
     });
@@ -1125,15 +1160,15 @@
     };
     const tail = (u) => { try { return '@' + decodeURIComponent(u.replace(/\/+$/, '').split('/').pop()); } catch { return ''; } };
     const channels = [];
-    if (P.email) channels.push({ icon: icons.email, name: 'Email', meta: P.email, href: 'mailto:' + P.email, note: 'Send an email', mail: true });
-    if (P.linkedin) channels.push({ icon: icons.linkedin, name: 'LinkedIn', meta: tail(P.linkedin), href: P.linkedin, note: 'Professional profile' });
-    if (P.github) channels.push({ icon: icons.github, name: 'GitHub', meta: tail(P.github), href: P.github, note: 'Code and projects' });
-    if (P.tryhackme) channels.push({ icon: icons.tryhackme, name: 'TryHackMe', meta: tail(P.tryhackme), href: P.tryhackme, note: 'Security lab progress' });
-    if (P.medium) channels.push({ icon: icons.medium, name: 'Medium', meta: tail(P.medium), href: P.medium, note: 'Articles and writeups' });
-    if (P.x) channels.push({ icon: icons.x, name: 'X', meta: tail(P.x), href: P.x, note: 'Updates on X' });
-    if (P.facebook) channels.push({ icon: icons.facebook, name: 'Facebook', meta: tail(P.facebook), href: P.facebook, note: 'Facebook profile' });
-    if (P.instagram) channels.push({ icon: icons.instagram, name: 'Instagram', meta: tail(P.instagram), href: P.instagram, note: 'Instagram profile' });
-    if (P.youtube) channels.push({ icon: icons.youtube, name: 'YouTube', meta: tail(P.youtube), href: P.youtube, note: 'YouTube channel' });
+    if (P.email) channels.push({ icon: icons.email, name: 'Email', meta: P.email, href: 'mailto:' + encodeURIComponent(P.email).replace(/%40/g, '@'), note: 'Send an email', mail: true });
+    if (P.linkedin) channels.push({ icon: icons.linkedin, name: 'LinkedIn', meta: tail(P.linkedin), href: safeUrl(P.linkedin), note: 'Professional profile' });
+    if (P.github) channels.push({ icon: icons.github, name: 'GitHub', meta: tail(P.github), href: safeUrl(P.github), note: 'Code and projects' });
+    if (P.tryhackme) channels.push({ icon: icons.tryhackme, name: 'TryHackMe', meta: tail(P.tryhackme), href: safeUrl(P.tryhackme), note: 'Security lab progress' });
+    if (P.medium) channels.push({ icon: icons.medium, name: 'Medium', meta: tail(P.medium), href: safeUrl(P.medium), note: 'Articles and writeups' });
+    if (P.x) channels.push({ icon: icons.x, name: 'X', meta: tail(P.x), href: safeUrl(P.x), note: 'Updates on X' });
+    if (P.facebook) channels.push({ icon: icons.facebook, name: 'Facebook', meta: tail(P.facebook), href: safeUrl(P.facebook), note: 'Facebook profile' });
+    if (P.instagram) channels.push({ icon: icons.instagram, name: 'Instagram', meta: tail(P.instagram), href: safeUrl(P.instagram), note: 'Instagram profile' });
+    if (P.youtube) channels.push({ icon: icons.youtube, name: 'YouTube', meta: tail(P.youtube), href: safeUrl(P.youtube), note: 'YouTube channel' });
     box.innerHTML = '';
     const h = document.createElement('h3');
     h.className = 'mono';
@@ -1147,7 +1182,7 @@
       const i = document.createElement('span');
       i.className = 'cl-icon';
       i.setAttribute('aria-hidden', 'true');
-      i.innerHTML = c.icon;
+      i.innerHTML = c.icon; // static SVG defined in this file, never user data
       const wrap = document.createElement('div');
       const b = document.createElement('b');
       b.textContent = c.name;
@@ -1208,26 +1243,6 @@
 
 
 
-  function moonPhase(date) {
-    const SYNODIC = 29.530588853;
-    const NEW_MOON_2000 = Date.UTC(2000, 0, 6, 18, 14) / 86400000;
-    const days = (date.getTime() / 86400000) - NEW_MOON_2000;
-    let frac = (days % SYNODIC) / SYNODIC;
-    if (frac < 0) frac += 1;
-    const idx = Math.round(frac * 8) % 8;
-    const PHASES = [
-      { glyph: '●', name: 'New Moon' },
-      { glyph: '◔', name: 'Waxing Crescent' },
-      { glyph: '◑', name: 'First Quarter' },
-      { glyph: '◕', name: 'Waxing Gibbous' },
-      { glyph: '○', name: 'Full Moon' },
-      { glyph: '◕', name: 'Waning Gibbous' },
-      { glyph: '◐', name: 'Last Quarter' },
-      { glyph: '◔', name: 'Waning Crescent' }
-    ];
-    return PHASES[idx];
-  }
-
    
   function initFooter() {
     const y = $('#year');
@@ -1243,8 +1258,9 @@
       let pick = null;
       if (lines.length) {
         const n = store.get('quoteIdx', -1);
-        pick = (n >= 0 && n < lines.length) ? lines[n] : lines[Math.floor(Math.random() * lines.length)];
-        store.set('quoteIdx', lines.indexOf(pick));
+        const next = (n >= 0 && n < lines.length) ? (n + 1) % lines.length : Math.floor(Math.random() * lines.length);
+        pick = lines[next];
+        store.set('quoteIdx', next);
       } else if (D.PROFILE && D.PROFILE.quote) {
         pick = D.PROFILE.quote;
       }
@@ -1252,17 +1268,6 @@
     }
 
     
-
-    const mp = $('#moonPhase');
-    if (mp) {
-      const p = moonPhase(new Date());
-      const g = document.createElement('span');
-      g.className = 'mp-glyph';
-      g.setAttribute('aria-hidden', 'true');
-      g.textContent = p.glyph;
-      mp.textContent = '';
-      mp.append(g, document.createTextNode(p.name.toUpperCase() + ' TONIGHT'));
-    }
 
     ['#privacyLink', '#disclosureLink'].forEach(sel => {
       const a = $(sel);
@@ -1304,44 +1309,6 @@
 
 
 
-  function initPortraitMedia() {
-    const imgs = $$('#heroPortrait, #aboutPortrait');
-    if (!imgs.length) return;
-     
-    const av = D.PROFILE && D.PROFILE.avatar;
-    if (av) imgs.forEach(img => { if (img.getAttribute('src') !== av) img.src = av; });
-    
-
-    const check = async () => {
-      const img = imgs[0];
-      if (!img || img.tagName !== 'IMG' || !img.complete || !img.naturalWidth) return;
-      const cv = document.createElement('canvas');
-      cv.width = 64; cv.height = 36;
-      const cx = cv.getContext('2d', { willReadFrequently: true });
-      const sig = () => { cx.drawImage(img, 0, 0, 64, 36); const d = cx.getImageData(0, 0, 64, 36).data; let s = 0; for (let i = 0; i < d.length; i += 7) s += d[i]; return s; };
-      const a = sig(); await new Promise(r => setTimeout(r, 800));
-      const b = sig(); await new Promise(r => setTimeout(r, 800));
-      const c = sig();
-      if (!(a === b && b === c)) return;  
-      imgs.forEach(old => {
-        const v = document.createElement('video');
-        v.muted = true; v.loop = true; v.autoplay = true;
-        v.setAttribute('playsinline', '');
-        v.className = old.className;
-        v.setAttribute('aria-label', old.alt);
-        ['assets/elias-motion.webm', 'assets/elias-motion.mp4'].forEach(src => {
-          const s = document.createElement('source');
-          s.src = src; s.type = src.endsWith('.webm') ? 'video/webm' : 'video/mp4';
-          v.appendChild(s);
-        });
-        old.replaceWith(v);
-        v.play().catch(() => {});
-      });
-    };
-    const arm = () => setTimeout(check, 1200);
-    if (document.readyState === 'complete') arm();
-    else addEventListener('load', arm, { once: true });
-  }
 
   
 
@@ -1382,7 +1349,12 @@
       const on = document.body.classList.toggle('blood-moon');
       store.set('bloodMoon', on);
       const themeBtn = $('#themeBtn');
-      themeBtn && themeBtn.setAttribute('aria-pressed', String(on));
+      if (themeBtn) {
+        themeBtn.setAttribute('aria-pressed', String(on));
+        const label = on ? 'Switch to warm paper theme' : 'Switch to original night theme';
+        themeBtn.setAttribute('aria-label', label);
+        themeBtn.title = label;
+      }
       spawnBatFrenzy();
     });
   }
@@ -1423,7 +1395,7 @@
     // (or leave the page stuck with scrolling locked).
     const safe = (fn) => { try { fn(); } catch (err) { console.error('[init] ' + fn.name + ' failed:', err); } };
     [
-      initNav, initToggles, initPortraitMedia, renderAbout, initBioRedaction,
+      initNav, initToggles, renderAbout, initBioRedaction,
       renderSkills, renderSkillRadar, renderProjects, renderHunt, renderExperience,
       renderCerts, initWriteups, initScenePrlx, renderContactChannels, spawnBats,
       initPointerFX, initScrollFX, initTyped, initForm, initFooter, initModal,
