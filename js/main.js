@@ -63,9 +63,13 @@
 
   function initLoader() {
     const loader = $('#loader');
-    if (!loader) return;
+    if (!loader) {
+      document.body.classList.remove('no-scroll');
+      return;
+    }
     if (document.documentElement.classList.contains('intro-seen')) {
       loader.remove();
+      document.body.classList.remove('no-scroll');
       return;
     }
     let done = false;
