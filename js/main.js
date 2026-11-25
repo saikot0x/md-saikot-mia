@@ -106,8 +106,11 @@
       burger.setAttribute('aria-expanded', String(open));
     });
     $$('a', menu).forEach(a => a.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && menu.classList.contains('open')) { closeMenu(); burger.focus(); } });
+    document.addEventListener('click', e => { if (menu.classList.contains('open') && !e.target.closest('#navbar')) closeMenu(); });
+    matchMedia('(min-width: 861px)').addEventListener('change', e => { if (e.matches) closeMenu(); });
     const links = $$('.nav-link');
-    const sections = ['home', 'about', 'skills', 'projects', 'methodology', 'experience', 'writeups', 'contact']
+    const sections = ['home', 'about', 'skills', 'projects', 'experience', 'certifications', 'writeups', 'contact']
       .map(id => document.getElementById(id)).filter(Boolean);
     const spy = new IntersectionObserver(entries => {
       entries.forEach(e => {
@@ -947,7 +950,7 @@
   }
 
   function initScrollFX() {
-    const bar = $('#scrollProgress'), top = $('#backTop');
+    const bar = $('#scrollFill'), top = $('#backTop');
     let raf = null;
     const track = () => {
       raf = null;
@@ -1416,29 +1419,23 @@
    
   document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add('no-scroll');
-    initNav();
-    initToggles();
-    initPortraitMedia();
-    renderAbout();
-    initBioRedaction();
-    renderSkills();
-    renderSkillRadar();
-    renderProjects();
-    renderHunt();
-    renderExperience();
-    renderCerts();
-    initWriteups();
-    initScenePrlx();
-    renderContactChannels();
-    spawnBats();
-    initPointerFX();
-    initScrollFX();
-    initTyped();
-    initForm();
-    initFooter();
-    initModal();
-    initEasterEggs();
-    initReveal();
-    initLoader();
+    // Run every init on its own so one error can never stop the rest
+    // (or leave the page stuck with scrolling locked).
+    const safe = (fn) => { try { fn(); } catch (err) { console.error('[init] ' + fn.name + ' failed:', err); } };
+    [
+      initNav, initToggles, initPortraitMedia, renderAbout, initBioRedaction,
+      renderSkills, renderSkillRadar, renderProjects, renderHunt, renderExperience,
+      renderCerts, initWriteups, initScenePrlx, renderContactChannels, spawnBats,
+      initPointerFX, initScrollFX, initTyped, initForm, initFooter, initModal,
+      initEasterEggs, initReveal, initLoader
+    ].forEach(safe);
+
+    // Safety net: if the intro never finishes, unlock scrolling anyway.
+    setTimeout(() => {
+      const modalOpen = $('#modalOverlay') && !$('#modalOverlay').hidden;
+      if (!modalOpen) document.body.classList.remove('no-scroll');
+      const l = $('#loader');
+      if (l && !l.classList.contains('done')) finishLoader();
+    }, 6000);
   });
 })();
