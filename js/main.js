@@ -748,10 +748,24 @@
       if (note) note.hidden = true;
       if (submitBtn) submitBtn.disabled = true;
       try {
-        if (!emailjs || typeof emailjs.sendForm !== 'function') {
+        if (!emailjs || typeof emailjs.send !== 'function') {
           throw new Error('EmailJS failed to load.');
         }
-        await emailjs.sendForm(emailjsConfig.serviceId, emailjsConfig.templateId, form);
+        // Send the values under several common variable names, so the EmailJS template
+        // shows name / email / subject whichever of these names it uses.
+        const nameVal = fields.name.el.value.trim();
+        const emailVal = fields.email.el.value.trim();
+        const typeEl = fields.type.el;
+        const typeVal = (typeEl.options[typeEl.selectedIndex] || {}).text || typeEl.value;
+        const msgVal = fields.message.el.value.trim();
+        const subjectVal = 'Portfolio message: ' + typeVal + ' (from ' + nameVal + ')';
+        await emailjs.send(emailjsConfig.serviceId, emailjsConfig.templateId, {
+          name: nameVal, from_name: nameVal, user_name: nameVal, sender_name: nameVal,
+          email: emailVal, from_email: emailVal, user_email: emailVal, reply_to: emailVal,
+          type: typeVal, subject: subjectVal, title: subjectVal,
+          message: msgVal, user_message: msgVal,
+          time: new Date().toLocaleString()
+        });
         lastSend = Date.now();
         form.reset();
         Object.values(fields).forEach(f => show(f, true));
