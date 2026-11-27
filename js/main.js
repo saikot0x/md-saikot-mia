@@ -117,7 +117,7 @@
     document.addEventListener('click', e => { if (menu.classList.contains('open') && !e.target.closest('#navbar')) closeMenu(); });
     matchMedia('(min-width: 861px)').addEventListener('change', e => { if (e.matches) closeMenu(); });
     const links = $$('.nav-link');
-    const sections = ['home', 'about', 'skills', 'projects', 'experience', 'certifications', 'writeups', 'contact']
+    const sections = ['home', 'about', 'skills', 'projects', 'experience', 'achievements', 'writeups', 'contact']
       .map(id => document.getElementById(id)).filter(Boolean);
     const spy = new IntersectionObserver(entries => {
       entries.forEach(e => {
@@ -132,7 +132,7 @@
 
    
   function initToggles() {
-    const themeBtn = $('#themeBtn'), perfBtn = $('#perfBtn'), motionBtn = $('#motionBtn');
+    const themeBtn = $('#themeBtn');
     const setPressed = (btn, on) => btn && btn.setAttribute('aria-pressed', String(on));
     const setThemeButton = on => {
       setPressed(themeBtn, on);
@@ -142,9 +142,14 @@
         themeBtn.title = label;
       }
     };
-    const nightTheme = store.get('bloodMoon', false);
-    document.body.classList.toggle('blood-moon', nightTheme);
-    setThemeButton(nightTheme);
+    // First visit: follow the device theme. After the visitor picks a theme, their choice is saved and wins.
+    const darkMQ = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+    const hasChoice = () => store.get('bloodMoon', null) !== null;
+    const applyTheme = on => { document.body.classList.toggle('blood-moon', on); setThemeButton(on); };
+    applyTheme(hasChoice() ? store.get('bloodMoon', false) === true : !!(darkMQ && darkMQ.matches));
+    if (darkMQ && darkMQ.addEventListener) {
+      darkMQ.addEventListener('change', e => { if (!hasChoice()) applyTheme(e.matches); });
+    }
     themeBtn && themeBtn.addEventListener('click', () => {
       const on = document.body.classList.toggle('blood-moon');
       store.set('bloodMoon', on); setThemeButton(on);
@@ -162,19 +167,8 @@
       document.body.addEventListener('animationend', clear, { once: true });
       setTimeout(clear, 1200);
     });
-    state.perf = store.get('perf', false);
-    if (state.perf) { document.body.classList.add('perf'); setPressed(perfBtn, true); }
-    perfBtn && perfBtn.addEventListener('click', () => {
-      state.perf = document.body.classList.toggle('perf');
-      store.set('perf', state.perf); setPressed(perfBtn, state.perf);
-    });
-    const applyReduced = (on) => {
-      state.reduced = on;
-      document.body.classList.toggle('reduced', on);
-      setPressed(motionBtn, on);
-    };
+    const applyReduced = (on) => { state.reduced = on; document.body.classList.toggle('reduced', on); };
     if (store.get('reduced', state.reduced)) applyReduced(true);
-    motionBtn && motionBtn.addEventListener('click', () => applyReduced(!state.reduced));
     
 
 
@@ -200,60 +194,6 @@
       });
     }, { threshold: 0.12 });
     $$('.reveal').forEach(el => io.observe(el));
-  }
-
-   
-  function renderAbout() {
-    const fg = $('#factsGrid');
-    if (fg && D.PROFILE) fg.innerHTML = D.PROFILE.facts.map(f =>
-      `<li><span class="f-label">${esc(f.label)}</span><span class="f-value">${esc(f.value)}</span></li>`).join('');
-    const cp = $('#corePrinciples');
-    if (cp && D.PROFILE) cp.innerHTML = D.PROFILE.principles.map(p =>
-      `<div class="principle"><span class="p-icon" aria-hidden="true">${esc(p.icon)}</span><span><b>${esc(p.title)}</b><p>${esc(p.text)}</p></span></div>`).join('');
-    const v = $('#vials');
-    if (v && D.PROFILE) {
-      D.PROFILE.vials.forEach(x => {
-        const row = document.createElement('div');
-        row.className = 'vial-row';
-        row.innerHTML = `<span class="vial-label">${esc(x.label)}</span><span class="vial-track"><span class="vial-fill" data-v="${num(x.value)}"></span></span><span class="vial-val">${num(x.value)}%</span>`;
-        v.appendChild(row);
-      });
-      const vio = new IntersectionObserver(es => {
-        if (es[0].isIntersecting) {
-          $$('.vial-fill', v).forEach((f, i) => setTimeout(() => { f.style.width = f.dataset.v + '%'; }, state.reduced ? 0 : i * 140));
-          vio.disconnect();
-        }
-      }, { threshold: 0.4 });
-      vio.observe(v);
-    }
-  }
-
-  
-
-
-
-
-
-
-  function initBioRedaction() {
-    const bio = $('#aboutBio');
-    if (!bio || state.reduced) return;
-    bio.classList.add('redact');
-    [[0, 36], [32, 36], [64, 36]].forEach(([top, h], i) => {
-      const bar = document.createElement('span');
-      bar.className = 'redact-bar';
-      bar.setAttribute('aria-hidden', 'true');
-      bar.style.top = top + '%';
-      bar.style.height = h + '%';
-      bar.style.transitionDelay = (i * 0.12) + 's';
-      bio.appendChild(bar);
-    });
-    const io = new IntersectionObserver(es => {
-      if (!es[0].isIntersecting) return;
-      bio.classList.add('in');
-      io.disconnect();
-    }, { threshold: 0.35 });
-    io.observe(bio);
   }
 
    
@@ -363,259 +303,6 @@
 
 
 
-  function renderConstellation() {
-    const box = $('#constellation');
-    if (!box || !D.SKILLS || !D.SKILLS.length) return;
-    const NS = 'http://www.w3.org/2000/svg';
-    const graphNames = [
-      'TCP/IP', 'Subnetting', 'Wireshark', 'Nmap', 'Linux Security',
-      'Web Security', 'Python', 'Bash', 'Network Security',
-      'Ethical Hacking Fundamentals'
-    ];
-    const skills = graphNames
-      .map(name => D.SKILLS.find(skill => skill.name === name))
-      .filter(Boolean);
-    const n = skills.length;
-    if (!n) return;
-    const skillIndex = new Map(skills.map((skill, i) => [skill.name, i]));
-    const graphConnections = [
-      ['TCP/IP', 'Subnetting'], ['TCP/IP', 'Wireshark'], ['TCP/IP', 'Nmap'],
-      ['TCP/IP', 'Network Security'], ['Subnetting', 'Nmap'],
-      ['Wireshark', 'Nmap'], ['Wireshark', 'Network Security'],
-      ['Linux Security', 'Bash'], ['Linux Security', 'Python'],
-      ['Linux Security', 'Network Security'], ['Web Security', 'Python'],
-      ['Web Security', 'Ethical Hacking Fundamentals'],
-      ['Network Security', 'Ethical Hacking Fundamentals']
-    ];
-
-    
-
-    const seen = new Set();
-    const edges = graphConnections.map(([from, to]) => [
-      skillIndex.get(from), skillIndex.get(to)
-    ]).filter(([a, b]) => {
-      if (a == null || b == null || a === b) return false;
-      const key = a < b ? a + '-' + b : b + '-' + a;
-      if (seen.has(key)) return false;
-      seen.add(key);
-      return true;
-    });
-
-     
-    const CX = 50, CY = 50;
-    const pts = skills.map((_, i) => {
-      const a = (i / n) * Math.PI * 2 - Math.PI / 2;
-      const r = i % 2 ? 34 : 42;       
-      return [CX + Math.cos(a) * r, CY + Math.sin(a) * r];
-    });
-     
-    const rad = (lv) => 6 + Math.max(0, Math.min(100, lv)) * 0.08;
-
-     
-    const adj = skills.map(() => new Set());
-    edges.forEach(([a, b]) => { adj[a].add(b); adj[b].add(a); });
-
-    const svg = document.createElementNS(NS, 'svg');
-    svg.setAttribute('viewBox', '0 0 100 100');
-    
-
-
-    svg.setAttribute('aria-hidden', 'true');
-    svg.setAttribute('focusable', 'false');
-
-     
-    const edgeEls = edges.map(([a, b]) => {
-      const ln = document.createElementNS(NS, 'line');
-      ln.setAttribute('x1', pts[a][0]); ln.setAttribute('y1', pts[a][1]);
-      ln.setAttribute('x2', pts[b][0]); ln.setAttribute('y2', pts[b][1]);
-      ln.setAttribute('class', 'cg-edge');
-      ln.dataset.a = a; ln.dataset.b = b;
-      
-
-      if (!state.reduced) {
-        const len = Math.hypot(pts[b][0] - pts[a][0], pts[b][1] - pts[a][1]);
-        ln.style.strokeDasharray = len;
-        ln.style.strokeDashoffset = len;
-      }
-      svg.appendChild(ln);
-      return ln;
-    });
-
-     
-    const signal = document.createElementNS(NS, 'circle');
-    signal.setAttribute('r', '1.1');
-    signal.setAttribute('class', 'cg-signal');
-    signal.setAttribute('cx', pts[0][0]);
-    signal.setAttribute('cy', pts[0][1]);
-    if (!state.reduced) svg.appendChild(signal);
-
-     
-    const nodeEls = [];
-    skills.forEach((s, i) => {
-      const g = document.createElementNS(NS, 'g');
-      g.setAttribute('class', 'cg-node');
-      g.setAttribute('tabindex', '0');
-      g.setAttribute('role', 'button');
-      g.setAttribute('aria-pressed', 'false');
-      g.setAttribute('aria-label',
-        `${s.name}. Level ${s.level} percent. Tools: ${s.tools.join(', ')}.`);
-      g.dataset.i = i;
-
-      const r = rad(s.level);
-      const ring = document.createElementNS(NS, 'circle');
-      ring.setAttribute('cx', pts[i][0]); ring.setAttribute('cy', pts[i][1]);
-      ring.setAttribute('r', r); ring.setAttribute('class', 'cg-node-ring');
-      g.appendChild(ring);
-
-      const foc = document.createElementNS(NS, 'circle');
-      foc.setAttribute('cx', pts[i][0]); foc.setAttribute('cy', pts[i][1]);
-      foc.setAttribute('r', r + 2.2); foc.setAttribute('class', 'cg-focus');
-      g.appendChild(foc);
-
-      const glyph = document.createElementNS(NS, 'text');
-      glyph.setAttribute('x', pts[i][0]); glyph.setAttribute('y', pts[i][1]);
-      glyph.setAttribute('class', 'cg-node-glyph');
-      glyph.textContent = s.icon;
-      g.appendChild(glyph);
-
-       
-      if (!state.reduced) {
-        g.style.opacity = '0';
-        g.style.transition = 'opacity .4s ease';
-      }
-      svg.appendChild(g);
-      nodeEls.push(g);
-    });
-
-    box.appendChild(svg);
-
-     
-    const readout = document.createElement('div');
-    readout.className = 'cg-readout';
-    readout.setAttribute('aria-live', 'polite');
-    box.appendChild(readout);
-
-    const hint = document.createElement('p');
-    hint.className = 'cg-hint';
-    hint.textContent = 'HOVER OR TAB THROUGH NODES — ARROW KEYS NAVIGATE';
-    box.appendChild(hint);
-
-     
-    let current = -1;
-    function select(i) {
-      current = i;
-      const s = skills[i];
-      const conns = [...adj[i]].map(x => skills[x].name);
-      readout.innerHTML = `
-        <div class="cg-readout-head">
-          <span class="cg-readout-icon" aria-hidden="true">${esc(s.icon)}</span>
-          <span class="cg-readout-name">${esc(s.name)}</span>
-          <span class="cg-readout-level">${num(s.level)}%</span>
-        </div>
-        <p class="cg-readout-desc">${esc(s.desc)}</p>
-        <div class="cg-readout-tools">${s.tools.map(t => `<span>${esc(t)}</span>`).join('')}</div>
-        <p class="cg-readout-links">LINKED TO: <b>${conns.length ? esc(conns.join(' · ')) : 'no links'}</b></p>`;
-       
-      nodeEls.forEach((el, j) => {
-        const lit = j === i || adj[i].has(j);
-        el.classList.toggle('is-lit', lit);
-        el.classList.toggle('is-dim', !lit);
-        el.setAttribute('aria-pressed', String(j === i));
-      });
-      edgeEls.forEach(ln => {
-        const on = +ln.dataset.a === i || +ln.dataset.b === i;
-        ln.classList.toggle('is-lit', on);
-        ln.classList.toggle('is-dim', !on);
-      });
-    }
-    function clear() {
-      current = -1;
-      nodeEls.forEach(el => {
-        el.classList.remove('is-lit', 'is-dim');
-        el.setAttribute('aria-pressed', 'false');
-      });
-      edgeEls.forEach(ln => ln.classList.remove('is-lit', 'is-dim'));
-      readout.innerHTML = `<p class="cg-readout-desc" style="margin:0">Select a node to inspect a discipline — its level, tooling, and what it connects to.</p>`;
-    }
-    clear();
-
-     
-    nodeEls.forEach((el, i) => {
-      el.addEventListener('mouseenter', () => select(i));
-      el.addEventListener('focus', () => select(i));
-      el.addEventListener('click', () => select(i));
-    });
-    box.addEventListener('mouseleave', () => { if (current === -1) return; clear(); });
-
-     
-    svg.addEventListener('keydown', e => {
-      if (!['ArrowRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown', 'Home', 'End', 'Escape'].includes(e.key)) return;
-      e.preventDefault();
-      if (e.key === 'Escape') { clear(); return; }
-      let next;
-      if (e.key === 'Home') next = 0;
-      else if (e.key === 'End') next = n - 1;
-      else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = current < 0 ? 0 : (current + 1) % n;
-      else next = current < 0 ? n - 1 : (current - 1 + n) % n;
-      nodeEls[next].focus();
-      select(next);
-    });
-
-    
-
-    if (state.reduced) {
-      nodeEls.forEach(el => { el.style.opacity = '1'; });
-      edgeEls.forEach(ln => { ln.style.strokeDashoffset = 0; });
-    } else {
-      const io = new IntersectionObserver(es => {
-        if (!es[0].isIntersecting) return;
-        io.disconnect();
-         
-        edgeEls.forEach((ln, k) => {
-          ln.style.transition = `stroke-dashoffset .5s ease ${k * 0.04}s`;
-          ln.style.strokeDashoffset = 0;
-        });
-         
-        nodeEls.forEach((el, k) => {
-          setTimeout(() => { el.style.opacity = '1'; }, 180 + k * 60);
-        });
-        startSignal();
-      }, { threshold: 0.25 });
-      io.observe(box);
-    }
-
-     
-    let signalRaf = null, running = false, seg = 0, t = 0;
-    function startSignal() {
-      if (state.reduced || state.perf || !signal.parentNode || running) return;
-      running = true;
-      const step = () => {
-        if (!running) return;
-        t += 0.012;
-        if (t >= 1) { t = 0; seg = (seg + 1) % edges.length; }
-        const [a, b] = edges[seg];
-        signal.setAttribute('cx', pts[a][0] + (pts[b][0] - pts[a][0]) * t);
-        signal.setAttribute('cy', pts[a][1] + (pts[b][1] - pts[a][1]) * t);
-        signalRaf = requestAnimationFrame(step);
-      };
-      signalRaf = requestAnimationFrame(step);
-    }
-     
-    const vis = new IntersectionObserver(es => {
-      es.forEach(e => {
-        if (state.reduced || state.perf) return;
-        if (e.isIntersecting) startSignal();
-        else if (running) { running = false; cancelAnimationFrame(signalRaf); }
-      });
-    }, { threshold: 0 });
-    vis.observe(box);
-
-     
-    const fb = $('#constellationFallback');
-    if (fb) fb.classList.add('is-hidden');
-  }
-
-   
   function projectCard(p, i) {
     const cat = (D.PROJECT_CATS && D.PROJECT_CATS[p.cat]) || p.cat;
     const status = (p.status || '').toLowerCase();
@@ -631,7 +318,9 @@
           <div class="project-tags">${p.tags.map(t => `<span>#${esc(t)}</span>`).join('')}</div>
           <div class="project-actions">
             <button type="button" class="pbtn primary" data-cs="${i}" aria-haspopup="dialog" aria-label="View case study: ${esc(p.name)}">View Case Study</button>
-            <a class="pbtn" href="${esc(safeUrl(p.url))}" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+            ${p.demo
+              ? `<a class="pbtn" href="${esc(safeUrl(p.demo))}" target="_blank" rel="noopener noreferrer">Live Demo ↗</a>`
+              : `<span class="pbtn" aria-disabled="true" title="Demo link coming soon">Live Demo · Soon</span>`}
           </div>
         </div>
       </article>`;
@@ -641,8 +330,12 @@
     if (!grid || !D.PROJECTS) return;
     const featured = D.PROJECTS.map((p, i) => ({ p, i })).filter(x => x.p.featured);
     grid.innerHTML = featured.map(x => projectCard(x.p, x.i)).join('');
-    if (archive) archive.innerHTML = D.PROJECTS.map((p) =>
-      `<a class="archive-card" href="${esc(safeUrl(p.url))}" target="_blank" rel="noopener noreferrer"><span class="ac-head"><span class="ac-name">${esc(p.icon)} ${esc(p.name)}${p.fork ? ' <em class="ac-fork">FORK</em>' : ''}</span><span class="ac-stars">★ ${num(p.stars)}</span></span><span class="ac-desc">${esc(p.desc)}</span></a>`).join('');
+    if (archive) archive.innerHTML = D.PROJECTS.map((p) => {
+      const inner = `<span class="ac-head"><span class="ac-name">${esc(p.icon)} ${esc(p.name)}</span></span><span class="ac-desc">${esc(p.desc)}</span>`;
+      return p.demo
+        ? `<a class="archive-card" href="${esc(safeUrl(p.demo))}" target="_blank" rel="noopener noreferrer">${inner}</a>`
+        : `<div class="archive-card">${inner}</div>`;
+    }).join('');
     $$('#filterBar .filter-btn').forEach(btn => btn.addEventListener('click', () => {
       $$('#filterBar .filter-btn').forEach(b => b.classList.remove('is-active'));
       btn.classList.add('is-active');
@@ -687,7 +380,9 @@
       ${cs.lessons ? `<div class="ms-section"><h4>Lessons Learned</h4><p>${esc(cs.lessons)}</p></div>` : ''}
       ${cs.disclosure ? `<div class="ms-section ms-disclosure">🕊 ${esc(cs.disclosure)}</div>` : ''}
       <div class="ms-section"><h4>Tools &amp; Tags</h4><div class="ms-tools">${pr.tags.map(t => `<span>${esc(t)}</span>`).join('')}</div></div>
-      <div class="ms-links"><a class="btn btn-primary" href="${esc(safeUrl(pr.url))}" target="_blank" rel="noopener noreferrer">Open on GitHub ↗</a></div>`;
+      <div class="ms-links">${pr.demo
+        ? `<a class="btn btn-primary" href="${esc(safeUrl(pr.demo))}" target="_blank" rel="noopener noreferrer">Live Demo ↗</a>`
+        : `<span class="btn btn-primary" aria-disabled="true" title="Demo link coming soon">Live Demo · Soon</span>`}</div>`;
     lastFocus = document.activeElement;
     overlay.hidden = false;
     requestAnimationFrame(() => overlay.classList.add('open'));
@@ -718,31 +413,6 @@
         else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
       }
     });
-  }
-
-   
-  function renderHunt() {
-    const list = $('#huntStages');
-    if (!list || !D.HUNT_CYCLE) return;
-    list.innerHTML = D.HUNT_CYCLE.map(s =>
-      `<li class="hunt-stage" tabindex="0"><span class="hs-dot" aria-hidden="true">${esc(s.icon)}</span><span class="hs-n mono">STAGE ${s.n}</span><span class="hs-name">${esc(s.name)}</span><p class="hs-text">${esc(s.text)}</p></li>`).join('');
-    const fill = $('#threadFill'), marker = $('#huntMarker');
-    if (!fill || state.reduced) return;
-    const io = new IntersectionObserver(es => {
-      if (!es[0].isIntersecting) return;
-      io.disconnect();
-      const track = () => {
-        const rect = list.getBoundingClientRect();
-        const mid = innerHeight * 0.6;
-        let prog = (mid - rect.top) / rect.height;
-        prog = Math.max(0, Math.min(1, prog));
-        fill.style.width = (prog * 100) + '%';
-        if (marker) marker.style.left = (prog * 100) + '%';
-      };
-      addEventListener('scroll', track, { passive: true });
-      track();
-    }, { threshold: 0.2 });
-    io.observe(list);
   }
 
    
@@ -802,23 +472,6 @@
 
 
 
-    const bg = $('#badgeGrid');
-    if (bg && D.CERTS) bg.innerHTML = D.CERTS.map(c => {
-      if (c.sealed) {
-        return `<div class="badge badge-sealed reveal">
-          <span class="badge-icon" aria-hidden="true">${esc(c.icon)}</span>
-          <b>${esc(c.title)}</b>
-          <p class="b-meta">${esc(c.target || 'Certification track')}</p>
-          <span class="stamp stamp-sealed">Sealed — pending verification</span>
-        </div>`;
-      }
-      return `<div class="badge reveal">
-        <span class="badge-icon" aria-hidden="true">${esc(c.icon)}</span>
-        <b>${esc(c.title)}</b>
-        <p class="b-meta">${esc(c.issuer || '')}${c.date ? ' · ' + esc(c.date) : ''}</p>
-        ${c.verify ? `<a class="b-verify" href="${esc(c.verify)}" target="_blank" rel="noopener noreferrer">VERIFY ↗</a>` : ''}
-      </div>`;
-    }).join('');
     const tb = $('#thmBadges');
     if (tb && D.THM_BADGES) tb.innerHTML = D.THM_BADGES.map(b =>
       `<li><span aria-hidden="true">${esc(b.icon)}</span>${esc(b.name)}</li>`).join('');
@@ -1395,8 +1048,8 @@
     // (or leave the page stuck with scrolling locked).
     const safe = (fn) => { try { fn(); } catch (err) { console.error('[init] ' + fn.name + ' failed:', err); } };
     [
-      initNav, initToggles, renderAbout, initBioRedaction,
-      renderSkills, renderSkillRadar, renderProjects, renderHunt, renderExperience,
+      initNav, initToggles,
+      renderSkills, renderSkillRadar, renderProjects, renderExperience,
       renderCerts, initWriteups, initScenePrlx, renderContactChannels, spawnBats,
       initPointerFX, initScrollFX, initTyped, initForm, initFooter, initModal,
       initEasterEggs, initReveal, initLoader

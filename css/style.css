@@ -2301,3 +2301,12 @@ body.blood-moon .back-top svg{color:var(--red);filter:drop-shadow(0 0 6px rgba(1
 
 /* Honeypot field for the contact form (hidden from people, visible to bots) */
 .hp-field{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+/* project card buttons: allow a third button (Live Demo) to wrap instead of squeezing */
+.project-actions{flex-wrap:wrap}
+.pbtn{flex:1 1 auto}
+
+/* placeholder (not yet linked) buttons and plain archive cards */
+.pbtn[aria-disabled="true"],.btn[aria-disabled="true"]{opacity:.55;cursor:not-allowed;pointer-events:none}
+div.archive-card{cursor:default}
+div.archive-card:hover{transform:none;border-color:var(--line-soft)}

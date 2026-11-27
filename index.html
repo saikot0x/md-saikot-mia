@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Md Saikot Mia | Cyber Security &amp; Networking Portfolio</title>
 <meta name="description" content="Md Saikot Mia (saikot0x) — CST student focusing on Networking &amp; Cyber Security. Projects, TryHackMe lab progress and practical security skills.">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://api.emailjs.com; media-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://api.emailjs.com; media-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'; worker-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="author" content="Md Saikot Mia">
 <meta name="robots" content="index, follow">
@@ -54,8 +54,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<script src="js/early.js"></script>
-<link rel="stylesheet" href="css/style.css">
+<script src="js/early.js?v=4"></script>
+<link rel="stylesheet" href="css/style.css?v=3">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -196,7 +196,7 @@
           <span>PERSONAL PROFILE</span>
           <span class="online-dot"><span aria-hidden="true">●</span> ONLINE</span>
         </div>
-        <img class="identity-avatar" src="./images/profile.jpg" alt="Md Saikot Mia" loading="lazy" decoding="async">
+        <img class="identity-avatar" src="./images/profile.jpg" alt="SAIKOT0X logo" loading="lazy" decoding="async">
         <h3>Md Saikot Mia.</h3>
         <p class="identity-role">CST STUDENT</p>
         <div class="identity-divider" aria-hidden="true"></div>
@@ -352,15 +352,14 @@
   </div>
 </section>
 
-<section class="section certs" aria-label="Certifications and achievements" id="certifications">
+<section class="section certs" aria-label="Achievements" id="achievements">
   <div class="container">
     <div class="section-head reveal">
       <p class="section-eyebrow mono">HONORS // 06</p>
-      <h2 class="section-title">Certifications &amp; Achievements</h2>
-      <p class="section-sub">Currently building certifications and practical security experience.</p>
+      <h2 class="section-title">Achievements</h2>
+      <p class="section-sub">Hands-on lab progress on TryHackMe.</p>
     </div>
     <div class="stats-row" id="statsRow"></div>
-    <div class="badge-grid" id="badgeGrid"></div>
     <div class="thm-badges reveal">
       <p class="thm-title mono">BADGES</p>
       <ul id="thmBadges"></ul>
@@ -381,7 +380,7 @@
   <div class="container">
     <div class="section-head reveal">
       <h2 class="section-title" id="writeupsTitle">Writeups</h2>
-      <p class="section-sub">Short technical notes from labs and practice sessions.</p>
+      <p class="section-sub">Short technical notes from labs and practice sessions. Links go live as each one is published.</p>
     </div>
     <div class="filter-bar" role="group" aria-label="Filter writeups" id="writeupFilter">
       <button type="button" class="filter-btn is-active" data-filter="all">All</button>
@@ -414,7 +413,7 @@
           <p class="project-desc">Working through Nmap scan types, timing options and service detection with real examples from lab practice.</p>
           <div class="project-tags"><span>#nmap</span><span>#port-scanning</span><span>#recon</span></div>
           <div class="project-actions">
-            <a class="pbtn primary" href="https://github.com/saikot0x" target="_blank" rel="noopener noreferrer">Read on GitHub ↗</a>
+            <a class="pbtn primary" href="https://github.com/saikot0x" target="_blank" rel="noopener noreferrer">Read More ↗</a>
           </div>
         </div>
       </article>
@@ -538,7 +537,7 @@
       <p class="footer-quote" id="footerQuote"></p>
     </div>
     <nav class="footer-nav" aria-label="Footer">
-      <a href="#home">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#experience">Experience</a><a href="#certifications">Certifications</a><a href="#writeups">Writeups</a><a href="#contact">Contact</a>
+      <a href="#home">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#experience">Experience</a><a href="#achievements">Achievements</a><a href="#writeups">Writeups</a><a href="#contact">Contact</a>
     </nav>
     <div class="footer-social" id="footerSocial">
       <a href="https://github.com/saikot0x" target="_blank" rel="noopener noreferrer">GitHub</a>
@@ -567,8 +566,8 @@
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4.4.1/dist/email.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="js/data.js"></script>
-<script src="js/main.js?v=2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4.4.1/dist/email.min.js" integrity="sha384-SALc35EccAf6RzGw4iNsyj7kTPr33K7RoGzYu+7heZhT8s0GZouafRiCg1qy44AS" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="js/data.js?v=3"></script>
+<script src="js/main.js?v=4"></script>
 </body>
 </html>

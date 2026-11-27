@@ -49,7 +49,6 @@ const PROFILE = {
     {label:"Education",value:"Diploma in CST"},
     {label:"Institute",value:"Habiganj Polytechnic Institute"},
     {label:"Focus",value:"Networking → Cyber Security"},
-    {label:"Certifications",value:"1"},
     {label:"Location",value:"Bangladesh"},
     {label:"Availability",value:"Open to internships & networking roles"}
   ],
@@ -64,9 +63,8 @@ const PROFILE = {
 
 const STATS = [
   {value:48,suffix:"",label:"TryHackMe rooms completed"},
-  {value:9,suffix:"",label:"TryHackMe badges"},
+  {value:7,suffix:"",label:"TryHackMe badges"},
   {value:8,suffix:"",label:"Projects listed"},
-  {value:1,suffix:"",label:"Certification earned"},
   {value:9,suffix:"%",label:"TryHackMe rank (top percent)"}
 ];
 
@@ -103,31 +101,12 @@ const SKILLS = [
   {name:"Git",category:"Programming",level:35,status:"Learning",icon:"🌿",desc:"Practicing version control and change tracking.",tools:["Git","CLI"]},
   {name:"GitHub",category:"Programming",level:40,status:"Learning",icon:"🐙",desc:"Managing repositories and publishing projects.",tools:["Repositories","README"]},
   {name:"Kali Linux",category:"Security / Technical Tools",level:35,status:"Learning",icon:"🐉",desc:"Exploring a Linux environment for security labs.",tools:["Linux","CLI"]},
-  {name:"Nmap",category:"Security / Technical Tools",level:35,status:"Learning",icon:"🔍",desc:"Practicing authorized network discovery.",tools:["Nmap","Scanning"]},
-  {name:"Wireshark",category:"Security / Technical Tools",level:35,status:"Learning",icon:"🦈",desc:"Learning packet capture and inspection.",tools:["PCAP","Filters"]},
   {name:"Burp Suite",category:"Security / Technical Tools",level:20,status:"Learning",icon:"🕸️",desc:"Exploring web requests in authorized test labs.",tools:["Proxy","Repeater"]},
   {name:"Metasploit",category:"Security / Technical Tools",level:15,status:"Learning",icon:"💥",desc:"Studying the framework in controlled training labs.",tools:["Framework","Labs"]},
   {name:"Gobuster",category:"Security / Technical Tools",level:15,status:"Learning",icon:"📂",desc:"Learning authorized web content discovery.",tools:["Gobuster","Wordlists"]},
   {name:"SQLMap",category:"Security / Technical Tools",level:15,status:"Learning",icon:"🗃️",desc:"Studying SQL injection testing in authorized labs.",tools:["SQL","Labs"]},
   {name:"Hashcat",category:"Security / Technical Tools",level:10,status:"Learning",icon:"🔑",desc:"Learning password hash auditing concepts.",tools:["Hashes","Auditing"]},
   {name:"John the Ripper",category:"Security / Technical Tools",level:10,status:"Learning",icon:"🔐",desc:"Exploring password auditing in controlled environments.",tools:["Hashes","Wordlists"]},
-  {name:"Git",category:"Security / Technical Tools",level:35,status:"Learning",icon:"🌿",desc:"Tracking security lab notes and code changes.",tools:["Git","Version Control"]}
-];
-
-const SKILL_LINKS = [
-  [0,1],
-  [0,3],
-  [0,4],
-  [0,6],
-  [0,9],
-  [1,5],
-  [1,9],
-  [2,4],
-  [2,8],
-  [3,8],
-  [5,8],
-  [6,7],
-  [6,8]
 ];
 
 const PROJECT_CATS = {
@@ -148,7 +127,7 @@ const PROJECTS = [
     "stars": 0,
     "forks": 0,
     "status": "Ongoing",
-    "url": "https://github.com/saikot0x",
+    "demo": "",
     "icon": "📡",
     "tagline": "Host & port discovery on a local network",
     "desc": "A Python-based network scanning tool designed to discover hosts, open ports, services, and basic network information on a local network.",
@@ -171,7 +150,7 @@ const PROJECTS = [
     "stars": 0,
     "forks": 0,
     "status": "Ongoing",
-    "url": "https://github.com/saikot0x",
+    "demo": "",
     "icon": "🕸",
     "tagline": "Controlled lab for common web vulnerabilities",
     "desc": "A controlled web security laboratory for learning and demonstrating common web vulnerabilities in a safe, isolated environment.",
@@ -195,7 +174,7 @@ const PROJECTS = [
     "stars": 0,
     "forks": 0,
     "status": "Ongoing",
-    "url": "https://github.com/saikot0x",
+    "demo": "",
     "icon": "🦈",
     "tagline": "Reading real traffic, packet by packet",
     "desc": "A practical network traffic analysis project using Wireshark to capture and investigate real traffic patterns.",
@@ -219,7 +198,7 @@ const PROJECTS = [
     "stars": 0,
     "forks": 0,
     "status": "Planned",
-    "url": "https://github.com/saikot0x",
+    "demo": "",
     "icon": "⚙",
     "tagline": "Small scripts for routine security tasks",
     "desc": "A collection of Python and Bash scripts that automate basic security and networking tasks to save time during practice and labs.",
@@ -241,7 +220,7 @@ const PROJECTS = [
     "stars": 0,
     "forks": 0,
     "status": "Live",
-    "url": "https://github.com/saikot0x",
+    "demo": "",
     "icon": "🤖",
     "tagline": "Voice-enabled AI assistant for Kali Linux",
     "desc": "A voice-enabled AI assistant built for Kali Linux, supporting voice control, local system functions, and an online AI conversation mode.",
@@ -265,7 +244,7 @@ const PROJECTS = [
     "stars": 0,
     "forks": 0,
     "status": "Live",
-    "url": "https://github.com/saikot0x",
+    "demo": "https://smart-grocery-billing-system.vercel.app/",
     "icon": "🛒",
     "tagline": "Billing & inventory dashboard for small shops",
     "desc": "A store management panel for billing, inventory, products and customer records, built as a full college project with a clean dashboard UI.",
@@ -277,7 +256,7 @@ const PROJECTS = [
     ],
     "caseStudy": {
       "problem": "Small shops need a simple, reliable billing and inventory workflow without complex POS software — this covers the core operations in one dashboard.",
-      "approach": "Point-of-sale billing, product & category management, customer records and sales reports, built with HTML, CSS, JavaScript and Firebase. Live demo: https://smart-grocery-billing-system.vercel.app/"
+      "approach": "Point-of-sale billing, product & category management, customer records and sales reports, built with HTML, CSS, JavaScript and Firebase."
     }
   },
   {
@@ -288,7 +267,7 @@ const PROJECTS = [
     "stars": 0,
     "forks": 0,
     "status": "Completed",
-    "url": "https://github.com/saikot0x",
+    "demo": "",
     "icon": "🧊",
     "tagline": "Interactive 3D product landing page",
     "desc": "An interactive 3D landing page with motion effects and a product-focused layout, built to explore 3D web experiences.",
@@ -310,7 +289,7 @@ const PROJECTS = [
     "stars": 0,
     "forks": 0,
     "status": "Completed",
-    "url": "https://github.com/saikot0x",
+    "demo": "",
     "icon": "🔧",
     "tagline": "Organizes Kali tools by category",
     "desc": "A Python script that scans a Kali Linux system and organizes installed security tools by category to save time and reduce confusion.",
@@ -354,33 +333,6 @@ const THM_BADGES = [
   {
     "icon": "🔎",
     "name": "OhSINT"
-  }
-];
-
-const HUNT_CYCLE = [
-  {
-    "n": "01",
-    "icon": "📖",
-    "name": "Learn",
-    "text": "Pick one concept — a protocol, a tool, a technique — and study how it really works."
-  },
-  {
-    "n": "02",
-    "icon": "🧪",
-    "name": "Practice",
-    "text": "Try it hands-on in labs: TryHackMe rooms, Kali Linux, packet captures."
-  },
-  {
-    "n": "03",
-    "icon": "📜",
-    "name": "Document",
-    "text": "Write notes and writeups so every lab becomes something I can explain."
-  },
-  {
-    "n": "04",
-    "icon": "🛠",
-    "name": "Build",
-    "text": "Turn what I learned into small tools and projects, then repeat."
   }
 ];
 
@@ -436,8 +388,7 @@ const EXPERIENCE = [
     "orgLabel": null,
     "desc": "Completed the Cybersecurity (V2) course on Muktopaath.",
     "points": [
-      "Course completed in 2026",
-      "Certificate earned"
+      "Course completed in 2026"
     ],
     "tools": [
       "Cyber Security"
@@ -463,16 +414,6 @@ const EXPERIENCE = [
   }
 ];
 
-const CERTS = [
-  {
-    "icon": "🛡",
-    "title": "Cybersecurity (V2)",
-    "issuer": "Muktopaath — DIKKHA Project, ICT Division",
-    "date": "2026",
-    "verify": null
-  }
-];
-
 const AVAILABILITY = {
   "open": true,
   "openLabel": "Open to internships & networking roles",
@@ -482,6 +423,6 @@ const AVAILABILITY = {
 
  
 window.NF_DATA = {
-  PROFILE, STATS, SKILLS, SKILL_LINKS, PROJECT_CATS, PROJECTS, THM_BADGES,
-  HUNT_CYCLE, EXPERIENCE, CERTS, AVAILABILITY
+  PROFILE, STATS, SKILLS, PROJECT_CATS, PROJECTS, THM_BADGES,
+  EXPERIENCE, AVAILABILITY
 };
